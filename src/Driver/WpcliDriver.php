@@ -145,7 +145,7 @@ class WpcliDriver extends BaseDriver
      */
     public function clearCache()
     {
-        $this->wpcli('cache', 'flush');
+        $this->wpcli('cache', 'flush', ["--quiet"]);
     }
 
     /**
