@@ -38,9 +38,9 @@ before_install:
   - if [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then sudo apt-get install -y --force-yes apache2 libapache2-mod-php7.1 php7.1-curl php7.1-mysql php7.1-intl; fi;
   - sudo a2enmod rewrite
   - export WORDPRESS_SITE_DIR=$(pwd)/www/
-  - sudo sed -i -e "s,/var/www,$(pwd)/www,g" /etc/apache2/sites-available/000-default.conf
+  - sudo sed -i -e "s,/var/www/html,$(pwd)/www,g" /etc/apache2/sites-available/000-default.conf
   - sudo sed -i -e "s,AllowOverride None,AllowOverride All,g" /etc/apache2/sites-available/000-default.conf
-  - sudo sed -i -e "/DocumentRoot/i\ServerName wordpress.dev" /etc/apache2/sites-available/000-default.conf
+  - sudo sed -i -e "s,#ServerName www.example.com,ServerName wordpress.dev,g" /etc/apache2/sites-available/000-default.conf
   - echo "127.0.0.1 wordpress.dev" | sudo tee -a /etc/hosts
   - sudo /etc/init.d/apache2 restart
 
