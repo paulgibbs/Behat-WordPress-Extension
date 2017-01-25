@@ -27,6 +27,7 @@ matrix:
 
 before_install:
   - sudo apt-get update > /dev/null
+  - phpenv config-rm xdebug.ini
   - composer self-update
 
   # Install Apache
@@ -41,8 +42,6 @@ before_install:
   - sudo /etc/init.d/apache2 restart
 
 install:
-  - phpenv config-rm xdebug.ini
-
   # Install dependencies
   - composer validate
   - composer install --no-interaction --prefer-dist --no-progress;
