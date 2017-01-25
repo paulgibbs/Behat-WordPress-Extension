@@ -30,7 +30,8 @@ before_install:
   - composer self-update
 
   # Install Apache
-  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl; fi;
+  - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then sudo apt-get install -y --force-yes apache2 libapache2-mod-php7 php7-curl php7-mysql php7-intl; fi;
   - sudo a2enmod rewrite
   - export WORDPRESS_SITE_DIR=$(pwd)/www/
   - sudo sed -i -e "s,/var/www,$(pwd)/www,g" /etc/apache2/sites-available/default
