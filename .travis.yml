@@ -55,6 +55,8 @@ install:
   - sudo chmod -R a+rx ${WORDPRESS_SITE_DIR}
   - cat /etc/apache2/apache2.conf
 
+  - apachectl -S
+
   # start selenium
   - bash ./bin/pre-behat.sh
 
