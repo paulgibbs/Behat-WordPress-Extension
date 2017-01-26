@@ -52,7 +52,7 @@ install:
   # install wordpress
   - bash ./bin/prepare.sh wordpress root '' localhost $WP_VERSION
   - mv bin/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
-
+  - sudo chmod -R a+rx ${WORDPRESS_SITE_DIR}
   - cat /etc/apache2/apache2.conf
 
   # start selenium
