@@ -52,7 +52,7 @@ install:
   - bash ./bin/prepare.sh wordpress root '' localhost $WP_VERSION
   - mv bin/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
 
-  - cat /etc/apache2/apache.conf
+  - cat /etc/apache2/apache2.conf
 
   # start selenium
   - bash ./bin/pre-behat.sh
