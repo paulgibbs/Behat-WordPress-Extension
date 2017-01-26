@@ -40,6 +40,7 @@ before_install:
   - export WORDPRESS_SITE_DIR=$(pwd)/www/
   - sudo sed -i -e "s,/var/www/html,$(pwd)/www,g" /etc/apache2/sites-available/000-default.conf
   - sudo sed -i -e "s,#ServerName www.example.com,ServerName wordpress.dev,g" /etc/apache2/sites-available/000-default.conf
+  - sudo sed -i -e "s,/var/www,$(pwd)/www,g" /etc/apache2/apache2.conf
   - echo "127.0.0.1 wordpress.dev" | sudo tee -a /etc/hosts
   - sudo /etc/init.d/apache2 restart
 
