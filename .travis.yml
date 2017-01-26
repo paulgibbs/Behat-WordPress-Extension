@@ -61,6 +61,9 @@ install:
 
   - apachectl -S
 
+  - sudo /etc/init.d/apache2 restart
+  - sudo apachectl configtest
+
   # start selenium
   - bash ./bin/pre-behat.sh
 
