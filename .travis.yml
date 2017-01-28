@@ -44,7 +44,7 @@ before_install:
   - sudo sed -i -e "s,/var/www,$(pwd)/www,g" /etc/apache2/apache2.conf
   - echo "127.0.0.1 wordpress.dev" | sudo tee -a /etc/hosts
   - sudo a2ensite 000-default.conf
-  - sudo /etc/init.d/apache2 restart
+  - sudo service apache2 restart
   - cat /etc/apache2/sites-available/000-default.conf
   - sudo apachectl configtest
 
@@ -61,7 +61,7 @@ install:
 
   - apachectl -S
 
-  - sudo /etc/init.d/apache2 restart
+  - sudo service apache2 restart
   - sudo apachectl configtest
 
   # start selenium
