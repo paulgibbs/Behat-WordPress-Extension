@@ -1,3 +1,5 @@
+dist: trusty
+sudo: required
 language: php
 
 php:
@@ -26,22 +28,27 @@ matrix:
     - env: WP_VERSION=nightly
 
 before_install:
+  - sudo add-apt-repository ppa:ondrej/php -y > /dev/null
   - sudo apt-get update > /dev/null
+  - phpenv config-rm xdebug.ini
   - composer self-update
 
   # Install Apache
-  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' ]] ; then sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl; fi;
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then sudo apt-get install -y --force-yes apache2 libapache2-mod-php7.1 php7.1-curl php7.1-mysql php7.1-intl; fi;
   - sudo a2enmod rewrite
   - export WORDPRESS_SITE_DIR=$(pwd)/www/
-  - sudo sed -i -e "s,/var/www,$(pwd)/www,g" /etc/apache2/sites-available/default
-  - sudo sed -i -e "s,AllowOverride None,AllowOverride All,g" /etc/apache2/sites-available/default
-  - sudo sed -i -e "/DocumentRoot/i\ServerName wordpress.dev" /etc/apache2/sites-available/default
+  - sudo sed -i -e "s,/var/www/html,$(pwd)/www,g" /etc/apache2/sites-available/000-default.conf
+  - sudo sed -i -e "s,#ServerName www.example.com,ServerName wordpress.dev,g" /etc/apache2/sites-available/000-default.conf
+  - sudo sed -i -e "/ServerName wordpress.dev/a <Directory $(pwd)\/www>\nOptions Indexes\nRequire all granted\n<\/Directory>" /etc/apache2/sites-available/000-default.conf
+  - sudo sed -i -e "s,/var/www,$(pwd)/www,g" /etc/apache2/apache2.conf
   - echo "127.0.0.1 wordpress.dev" | sudo tee -a /etc/hosts
-  - sudo /etc/init.d/apache2 restart
+  - sudo a2ensite 000-default.conf
+  - sudo service apache2 restart
+  - cat /etc/apache2/sites-available/000-default.conf
+  - sudo apachectl configtest
 
 install:
-  - phpenv config-rm xdebug.ini
-
   # Install dependencies
   - composer validate
   - composer install --no-interaction --prefer-dist --no-progress;
@@ -49,6 +56,13 @@ install:
   # install wordpress
   - bash ./bin/prepare.sh wordpress root '' localhost $WP_VERSION
   - mv bin/sample.htaccess ${WORDPRESS_SITE_DIR}.htaccess
+  - sudo chmod -R a+rx ${WORDPRESS_SITE_DIR}
+  - cat /etc/apache2/apache2.conf
+
+  - apachectl -S
+
+  - sudo service apache2 restart
+  - sudo apachectl configtest
 
   # start selenium
   - bash ./bin/pre-behat.sh

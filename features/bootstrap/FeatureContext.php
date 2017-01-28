@@ -1,8 +1,9 @@
 <?php
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 
-use Behat\Behat\Context\SnippetAcceptingContext;
-
+use Behat\Behat\Context\SnippetAcceptingContext,
+    Behat\Behat\Hook\Scope\AfterScenarioScope,
+    Behat\Testwork\Tester\Result\TestResult;
 /**
  * Define application features from the specific context.
  */
@@ -17,4 +18,15 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
     public function __construct() {
         parent::__construct();
     }
+
+    /**
+     * @AfterScenario
+     */
+    public function printPageMarkUpAfterFailedStep(AfterScenarioScope $scope)
+    {
+        if (TestResult::FAILED === $scope->getTestResult()->getResultCode()) {
+            echo $this->getSession()->getPage()->getHtml();
+        }
+    }
+
 }
