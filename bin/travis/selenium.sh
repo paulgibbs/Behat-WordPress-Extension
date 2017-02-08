@@ -22,6 +22,6 @@ Xvfb > /dev/null 2>&1 &
 export DISPLAY=localhost:0.0
 
 # Start Selenium
-wget -O selenium.jar http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
-java -jar selenium.jar -p $SELENIUM_PORT > /dev/null 2>&1 &
+vendor/bin/selenium-server-standalone &
 wait_for_port $SELENIUM_PORT
+sleep 1
