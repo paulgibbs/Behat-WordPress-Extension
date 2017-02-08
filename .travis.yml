@@ -27,6 +27,7 @@ addons:
   apt:
     packages:
       - nginx
+      - oracle-java8-set-default
   hosts:
     - wordpress.dev
 
