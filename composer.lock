@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1c1209eadc98be7c1b84832abb2d5587",
-    "content-hash": "ef197d65fae84b5c221ccb018cc95e2b",
+    "hash": "5465afcf028542ba30f33f032940795a",
+    "content-hash": "b730add1b867ca71907149dc9e62bece",
     "packages": [
         {
             "name": "behat/behat",
@@ -2087,46 +2087,6 @@
             "time": "2015-06-15 20:19:33"
         },
         {
-            "name": "joomla-projects/selenium-server-standalone",
-            "version": "v3.0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joomla-projects/selenium-server-standalone.git",
-                "reference": "97c26476872439fb4bb67d6930a744aa18398390"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joomla-projects/selenium-server-standalone/zipball/97c26476872439fb4bb67d6930a744aa18398390",
-                "reference": "97c26476872439fb4bb67d6930a744aa18398390",
-                "shasum": ""
-            },
-            "bin": [
-                "bin/selenium-server-standalone"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache 2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Sven Eisenschmidt",
-                    "email": "sven.eisenschmidt@gmail.com"
-                },
-                {
-                    "name": "Javier Gómez",
-                    "email": "javier.gomez@community.joomla.org"
-                }
-            ],
-            "description": "Composer distribution of Selenium Server Standalone, the browser automation framework. Adds a executable to your composer bin directory.",
-            "homepage": "https://github.com/joomla-projects/selenium-server-standalone",
-            "keywords": [
-                "selenium",
-                "testing"
-            ],
-            "time": "2017-01-07 09:11:29"
-        },
-        {
             "name": "justinrainbow/json-schema",
             "version": "4.1.0",
             "source": {
@@ -2422,6 +2382,45 @@
                 "sockets"
             ],
             "time": "2016-10-13 00:11:37"
+        },
+        {
+            "name": "se/selenium-server-standalone",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sveneisenschmidt/selenium-server-standalone.git",
+                "reference": "13ec9af08ab56261da4e85fa61efbda3d693cd70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/13ec9af08ab56261da4e85fa61efbda3d693cd70",
+                "reference": "13ec9af08ab56261da4e85fa61efbda3d693cd70",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "bin/selenium-server-standalone"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Eisenschmidt",
+                    "email": "sven.eisenschmidt@gmail.com"
+                }
+            ],
+            "description": "Composer distribution of Selenium Server Standalone, the browser automation framework. Adds a executable to your composer bin directory.",
+            "homepage": "https://github.com/sveneisenschmidt/selenium-server-standalone",
+            "keywords": [
+                "selenium",
+                "testing"
+            ],
+            "time": "2016-12-13 10:48:27"
         },
         {
             "name": "seld/cli-prompt",
