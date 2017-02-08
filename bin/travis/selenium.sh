@@ -22,6 +22,6 @@ Xvfb > /dev/null 2>&1 &
 export DISPLAY=localhost:0.0
 
 # Start Selenium
-vendor/bin/selenium-server-standalone > /dev/null 2>&1 &
+vendor/bin/selenium-server-standalone &
 wait_for_port $SELENIUM_PORT
 sleep 1
