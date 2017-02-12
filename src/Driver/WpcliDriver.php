@@ -39,10 +39,10 @@ class WpcliDriver extends BaseDriver
     /**
      * Constructor.
      *
-     * @param string $alias  WP-CLI alias. This or $path must be not falsey.
-     * @param string $path   Absolute path to WordPress site's files. This or $alias must be not falsey.
-     * @param string $url    WordPress site URL.
-     * @param string $binary Path to the WP-CLI binary
+     * @param string      $alias  WP-CLI alias. This or $path must be not falsey.
+     * @param string      $path   Absolute path to WordPress site's files. This or $alias must be not falsey.
+     * @param string      $url    WordPress site URL.
+     * @param string|null $binary Path to the WP-CLI binary.
      */
     public function __construct($alias, $path, $url, $binary)
     {
@@ -50,10 +50,10 @@ class WpcliDriver extends BaseDriver
         $this->path  = realpath($path);
         $this->url   = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
 
-        //Support Windows
-        if (is_null($binary) && DIRECTORY_SEPARATOR === '\\') {
+        // Support Windows.
+        if ($binary === null && DIRECTORY_SEPARATOR === '\\') {
             $this->binary = 'wp.bat';
-        } elseif (! is_null($binary)) {
+        } elseif ($binary !== null) {
             $this->binary = $binary;
         }
     }
@@ -68,7 +68,7 @@ class WpcliDriver extends BaseDriver
     {
         $version = '';
 
-        preg_match('#^WP-CLI (\d\.\d\.\d)$#', $this->wpcli('cli', 'version')['cmd_output'], $match);
+        preg_match('#^WP-CLI (\d\.\d\.\d)$#', $this->wpcli('cli', 'version')['stdout'], $match);
         if (! empty($match)) {
             $version = array_pop($match);
         }
@@ -94,8 +94,8 @@ class WpcliDriver extends BaseDriver
      * @return array {
      *     WP-CLI command results.
      *
-     *     @type array $cmd_output Command output.
-     *     @type int   $exit_code  Returned status code of the executed command.
+     *     @type array $stdout    Command output.
+     *     @type int   $exit_code Returned status code of the executed command.
      * }
      */
     public function wpcli($command, $subcommand, $raw_arguments = [])
@@ -104,41 +104,43 @@ class WpcliDriver extends BaseDriver
 
         // Build parameter list.
         foreach ($raw_arguments as $name => $value) {
-            if (is_int($name)) {
+            if (is_numeric($name)) {
                 $arguments .= "{$value} ";
             } else {
                 $arguments .= sprintf('%s=%s ', $name, escapeshellarg($value));
             }
         }
 
-        // Support WP-CLI environment alias, or path and URL.
+        // TODO: review best practice with escapeshellcmd() here, and impact on metacharacters.
+        $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
+
+        // Support WP-CLI environment aliases.
         if ($this->alias) {
             $config = "@{$this->alias}";
-        } else {
-            // TODO: review best practice with escapeshellcmd() here, and impact on metacharactes.
-            $config = sprintf('--path=%s --url=%s', escapeshellarg($this->path), escapeshellarg($this->url));
         }
 
 
-        $wpcli_args = sprintf('--no-color --require=%1$s/WpcliLogger.php', dirname(__DIR__));
-
         // Query WP-CLI.
-        $proc = proc_open("{$this->binary} {$config} {$wpcli_args} {$command} {$subcommand} {$arguments}", [
-            1 => ['pipe','w'],
-            2 => ['pipe','w'],
-        ], $pipes);
+        $proc = proc_open(
+            "{$this->binary} {$config} --no-color {$command} {$subcommand} {$arguments}",
+            array(
+                1 => ['pipe', 'w'],
+                2 => ['pipe', 'w'],
+            ),
+            $pipes
+        );
 
-        $cmd_output = stream_get_contents($pipes[1]);
+        $stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
         fclose($pipes[2]);
         $exit_code = proc_close($proc);
 
-        if ($exit_code || $stderr) {
+        if ($exit_code || strpos($stderr, 'Warning: ') !== false || strpos($stderr, 'Warning: ') !== false) {
             throw new UnexpectedValueException("WP-CLI driver query failure: {$stderr} ($exit_code)");
         }
 
-        return compact('cmd_output', 'exit_code');
+        return compact('stdout', 'exit_code');
     }
 
     /**
@@ -202,12 +204,12 @@ class WpcliDriver extends BaseDriver
             }
         }
 
-        $term_id = (int) $this->wpcli('term', 'create', $wpcli_args)['cmd_output'];
+        $term_id = (int) $this->wpcli('term', 'create', $wpcli_args)['stdout'];
 
 
         // Term slug.
         $wpcli_args = [$taxonomy, $term_id, '--fields=slug'];
-        $term_slug  = $this->wpcli('term', 'get', $wpcli_args)['cmd_output'];
+        $term_slug  = $this->wpcli('term', 'get', $wpcli_args)['stdout'];
 
 
         return array(
@@ -253,12 +255,12 @@ class WpcliDriver extends BaseDriver
             }
         }
 
-        $post_id = (int) $this->wpcli('post', 'create', $wpcli_args)['cmd_output'];
+        $post_id = (int) $this->wpcli('post', 'create', $wpcli_args)['stdout'];
 
 
         // Post slug.
         $wpcli_args = [$post_id, '--fields=post_name'];
-        $post_slug  = $this->wpcli('post', 'get', $wpcli_args)['cmd_output'];
+        $post_slug  = $this->wpcli('post', 'get', $wpcli_args)['stdout'];
 
 
         return array(
@@ -310,7 +312,7 @@ class WpcliDriver extends BaseDriver
         }
 
         return array(
-            'id' => (int) $this->wpcli('comment', 'create', $wpcli_args)['cmd_output'],
+            'id' => (int) $this->wpcli('comment', 'create', $wpcli_args)['stdout'],
         );
     }
 
@@ -350,7 +352,7 @@ class WpcliDriver extends BaseDriver
         }
 
         // Protect against WP-CLI changing the filename.
-        $filename = $this->wpcli('db', 'export', [$filename, '--porcelain'])['cmd_output'];
+        $filename = $this->wpcli('db', 'export', [$filename, '--porcelain'])['stdout'];
 
         return getcwd() . "/{$filename}";
     }
@@ -393,12 +395,12 @@ class WpcliDriver extends BaseDriver
             }
         }
 
-        $user_id = (int) $this->wpcli('user', 'create', $wpcli_args)['cmd_output'];
+        $user_id = (int) $this->wpcli('user', 'create', $wpcli_args)['stdout'];
 
 
         // User slug (nicename.
         $wpcli_args = [$post_id, '--fields=user_nicename'];
-        $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['cmd_output'];
+        $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['stdout'];
 
 
         return array(
@@ -442,7 +444,7 @@ class WpcliDriver extends BaseDriver
     {
         $wpcli_args = [$username, '--field=ID'];
 
-        $userId = (int) $this->wpcli('user', 'get', $wpcli_args)['cmd_output'];
+        $userId = (int) $this->wpcli('user', 'get', $wpcli_args)['stdout'];
 
         if (! $userId) {
             throw new UnexpectedValueException(sprintf('User "%s" not found', $username));
