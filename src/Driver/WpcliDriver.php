@@ -95,7 +95,6 @@ class WpcliDriver extends BaseDriver
      *     WP-CLI command results.
      *
      *     @type string $stdout    Response text from WP-CLI.
-     *     @type string $stderr    Error response text from WP-CLI,
      *     @type int    $exit_code Returned status code of the executed command.
      * }
      */
@@ -132,16 +131,22 @@ class WpcliDriver extends BaseDriver
         );
 
         $stdout = stream_get_contents($pipes[1]);
-        fclose($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
         fclose($pipes[2]);
         $exit_code = proc_close($proc);
 
         if ($exit_code || $stderr || strpos($stdout, 'Warning: ') !== false || strpos($stdout, 'Error: ') !== false) {
-            throw new UnexpectedValueException("WP-CLI driver query failure: {$stderr} ($exit_code)");
+            throw new UnexpectedValueException(
+                sprintf(
+                    'WP-CLI driver query failure: %1$s (%2$s)',
+                    $stderr ?: $stdout,
+                    $exit_code
+                )
+            );
         }
 
-        return compact('stdout', 'stderr', 'exit_code');
+        return compact('stdout', 'exit_code');
     }
 
     /**
