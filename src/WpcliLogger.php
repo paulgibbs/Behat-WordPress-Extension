@@ -26,7 +26,7 @@ $bootstrap = '/tmp/wordhat-wpcli-bootstrap.php';
 exec(get_download_script($bootstrap));
 require_once($bootstrap);
 
-// If connecting via SSH, h ave the remote WP-CLI configure itself to use a custom logger.
+// If connecting via SSH, have the remote WP-CLI configure itself to use a custom logger.
 \WP_CLI::add_hook('before_ssh', function () use ($bootstrap) {
     $argv_count = count($GLOBALS['argv']);
     $option     = null;
@@ -39,7 +39,7 @@ require_once($bootstrap);
         }
     }
 
-    if (! $option) {
+    if ($option === null) {
         return;
     }
 

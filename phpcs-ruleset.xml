@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Behat for WordPress coding standards">
+<ruleset name="WordHat coding standards">
   <rule ref="PSR1" />
   <rule ref="PSR2" />
   <rule ref="PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket">

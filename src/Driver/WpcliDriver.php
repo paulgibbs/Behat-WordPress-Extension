@@ -404,10 +404,9 @@ class WpcliDriver extends BaseDriver
         $user_id = (int) $this->wpcli('user', 'create', $wpcli_args)['stdout'];
 
 
-        // User slug (nicename.
+        // Get user slug (nicename).
         $wpcli_args = [$post_id, '--fields=user_nicename'];
         $user_slug  = $this->wpcli('user', 'get', $wpcli_args)['stdout'];
-
 
         return array(
             'id'   => $user_id,

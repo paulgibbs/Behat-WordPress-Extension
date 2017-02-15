@@ -49,10 +49,10 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
             return $path;
         }
 
+        $url = $this->getMinkParameter('base_url');
+
         if (strpos($path, 'wp-admin') !== false || strpos($path, '.php') !== false) {
             $url = $this->getWordpressParameter('site_url');
-        } else {
-            $url = $this->getMinkParameter('base_url');
         }
 
         return rtrim($url, '/') . '/' . ltrim($path, '/');
@@ -294,7 +294,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function deleteTerm($term_id, $taxonomy)
     {
-        $this->getDriver()->activatePlugin($term_id, $taxonomy);
+        $this->getDriver()->deleteTerm($term_id, $taxonomy);
     }
 
     /**
