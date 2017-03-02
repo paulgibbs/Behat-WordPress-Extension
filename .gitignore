@@ -6,3 +6,4 @@ vendor/
 .couscous
 npm-debug.log
 wp-cli.yml
+.vscode/
