@@ -31,3 +31,8 @@ Provides step definitions for all things relating to users.
 ## WordpressContext
 
 Provides step definitions for a range of common tasks. Recommended for all test suites.
+
+
+## DebugContext
+
+Provides step definitions for debugging step definitions. Not recommended for use in production.
