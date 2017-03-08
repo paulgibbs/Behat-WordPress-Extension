@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [semantic versioning](http://semver.org/).
 
+## [Unreleased]
+### Deprecated
+- `is_wordpress_error()` moved into `Util` namespace
+
 ## [0.5.0] - 2017-02-08
 ### Added
 - PHPCS rules.

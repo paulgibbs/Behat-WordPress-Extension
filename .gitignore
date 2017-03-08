@@ -1,6 +1,7 @@
 vendor/
 /behat.yml
 /site/
+.vscode/
 
 .DS_Store
 .couscous

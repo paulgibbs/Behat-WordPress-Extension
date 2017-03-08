@@ -2,7 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Context;
 
 use Behat\Gherkin\Node\TableNode;
-use function PaulGibbs\WordpressBehatExtension\is_wordpress_error;
+use function PaulGibbs\WordpressBehatExtension\Util\is_wordpress_error;
 use RuntimeException;
 
 /**

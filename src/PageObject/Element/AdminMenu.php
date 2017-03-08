@@ -3,6 +3,7 @@ namespace PaulGibbs\WordpressBehatExtension\PageObject\Element;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
+use PaulGibbs\WordpressBehatExtension\Util;
 
 /**
  * An Element representing the admin menu.
@@ -27,7 +28,7 @@ class AdminMenu extends Element
         $menu_item_texts = array();
 
         foreach ($menu_item_nodes as $n => $element) {
-            $menu_item_texts[] = $this->stripTagsAndContent($element->getHtml());
+            $menu_item_texts[] = Util\stripTagsAndContent($element->getHtml());
         }
 
         return $menu_item_texts;
@@ -54,14 +55,14 @@ class AdminMenu extends Element
             // We use getHtml and strip the tags, as `.wp-menu-name` might not be visible (i.e. when the menu is
             // collapsed) so getText() will be empty.
             // @link https://github.com/stephenharris/WordPressBehatExtension/issues/2
-            $item_name = $this->stripTagsAndContent($first_level_item->find('css', '.wp-menu-name')->getHtml());
+            $item_name = Util\stripTagsAndContent($first_level_item->find('css', '.wp-menu-name')->getHtml());
 
             if (strtolower($item[0]) === strtolower($item_name)) {
                 if (isset($item[1])) {
                     $second_level_items = $first_level_item->findAll('css', 'ul li a');
 
                     foreach ($second_level_items as $second_level_item) {
-                        $item_name = $this->stripTagsAndContent($second_level_item->getHtml());
+                        $item_name = Util\stripTagsAndContent($second_level_item->getHtml());
                         if (strtolower($item[1]) === strtolower($item_name)) {
                             try {
                                 // Focus on the menu link so the submenu appears
@@ -86,42 +87,5 @@ class AdminMenu extends Element
         }
 
         $click_node->click();
-    }
-
-    /**
-     * Extracts 'top level' text from HTML.
-     *
-     * All HTML tags, and their contents are removed.
-     *
-     * e.g. Some <span>HTML and</span>text  -->  Some text
-     *
-     * @param string $html Raw HTML
-     * @param string Extracted text. e.g. Some <span>HTML and</span>text  -->  Some text
-     */
-    protected function stripTagsAndContent($html)
-    {
-        if (trim($html) === '') {
-            return $html;
-        }
-
-        $doc = new \DOMDocument();
-        $doc->loadHTML("<div>{$html}</div>");
-
-        $container = $doc->getElementsByTagName('div')->item(0);
-
-        // Remove nodes while iterating over them does not work
-        // @link http://php.net/manual/en/domnode.removechild.php#90292
-        $remove_queue = array();
-        foreach ($container->childNodes as $child_node) {
-            if ($child_node->nodeType !== XML_TEXT_NODE) {
-                $remove_queue[] = $child_node;
-            }
-        }
-
-        foreach ($remove_queue as $node) {
-            $container->removeChild($node);
-        }
-
-        return trim($container->textContent);
     }
 }

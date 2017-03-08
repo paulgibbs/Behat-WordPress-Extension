@@ -3,7 +3,7 @@ namespace PaulGibbs\WordpressBehatExtension\Driver;
 
 use RuntimeException;
 use UnexpectedValueException;
-use function PaulGibbs\WordpressBehatExtension\is_wordpress_error;
+use function PaulGibbs\WordpressBehatExtension\Util\is_wordpress_error;
 
 /**
  * Connect Behat to WordPress by loading WordPress directly into the global scope.
