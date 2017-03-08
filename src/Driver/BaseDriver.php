@@ -8,7 +8,7 @@ use PaulGibbs\WordpressBehatExtension\Exception\UnsupportedDriverActionException
  *
  * A driver represents and manages the connection between the Behat environment and a WordPress site.
  */
-abstract class BaseDriver implements Driver
+abstract class BaseDriver implements DriverInterface
 {
     /**
      * Track driver bootstrapping.
