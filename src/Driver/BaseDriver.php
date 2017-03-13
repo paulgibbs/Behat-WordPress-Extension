@@ -20,7 +20,7 @@ abstract class BaseDriver implements DriverInterface
     /**
      * Registered driver elements.
      *
-     * @var Element[]
+     * @var ElementInterface[]
      */
     protected $elements = [];
 
@@ -28,9 +28,9 @@ abstract class BaseDriver implements DriverInterface
      * Expose $elements as public properties.
      *
      * @param string $name Element name.
-     * @return Element|null Return Element object, or null if it doesn't exist.
+     * @return ElementInterface|null Return object, or null if it doesn't exist.
      */
-    public function __get(string $name)
+    public function __get($name)
     {
         if (isset($this->elements[$name])) {
             return $this->elements[$name];
