@@ -1,5 +1,6 @@
 parameters:
   wordpress.driver.wpcli.class: PaulGibbs\WordpressBehatExtension\Driver\WpcliDriver
+  wordpress.element.wpcli.content.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\ContentElement
 
 services:
   wordpress.driver.wpcli:
@@ -11,3 +12,10 @@ services:
       - %wordpress.driver.wpcli.binary%
     tags:
       - { name: wordpress.driver, alias: wpcli }
+
+  wordpress.element.wpcli.content:
+    class: %wordpress.element.wpcli.content.class%
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: wpcli }

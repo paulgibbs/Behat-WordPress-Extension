@@ -2,6 +2,7 @@
 namespace PaulGibbs\WordpressBehatExtension\Driver;
 
 use PaulGibbs\WordpressBehatExtension\Exception\UnsupportedDriverActionException;
+use PaulGibbs\WordpressBehatExtension\Driver\Element\ElementInterface;
 
 /**
  * Common base class for WordPress drivers.
@@ -55,5 +56,11 @@ abstract class BaseDriver implements DriverInterface
     public function bootstrap()
     {
         $this->is_bootstrapped = true;
+    }
+
+    public function addElement(ElementInterface $element)
+    {
+        die(var_dump($element));  // I need to get the short name of the element here somehow for hte arrayacess magic.
+        $elements[] = $element;
     }
 }
