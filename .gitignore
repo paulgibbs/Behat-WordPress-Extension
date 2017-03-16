@@ -2,6 +2,7 @@ vendor/
 /behat.yml
 /site/
 .vscode/
+/composer.lock
 
 .DS_Store
 .couscous
