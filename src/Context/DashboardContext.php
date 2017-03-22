@@ -31,6 +31,7 @@ class DashboardContext extends RawWordpressContext
     public function __construct(AdminPage $admin_page, Dashboard $dashboard)
     {
         parent::__construct();
+
         $this->admin_page = $admin_page;
         $this->dashboard = $dashboard;
     }

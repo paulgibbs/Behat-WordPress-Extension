@@ -55,14 +55,13 @@ class WordpressDriverManager
     /**
      * Register a new driver element.
      *
-     * @param string           $name    Register the element with this driver.
+     * @param string           $name    Driver name.
      * @param ElementInterface $element An instance of a ElementInterface.
      */
     public function registerDriverElement($name, ElementInterface $element)
     {
-        $this->getDriver($name)->addElement($element);
+        $this->getDriver($name)->registerElement($name, $element);
     }
-    //registerElements? or in the BaseDriver?
 
     /**
      * Return a registered driver by name (defaults to the default driver).

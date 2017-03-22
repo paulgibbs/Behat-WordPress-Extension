@@ -12,8 +12,8 @@ use Behat\Mink\Exception\ElementTextException;
  */
 class WordpressContext extends RawWordpressContext implements PageObjectAware
 {
-
     use PageObjectContextTrait;
+
     /**
      * Clear object cache.
      *

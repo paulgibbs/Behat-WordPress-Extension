@@ -58,9 +58,14 @@ abstract class BaseDriver implements DriverInterface
         $this->is_bootstrapped = true;
     }
 
-    public function addElement(ElementInterface $element)
+    /**
+     * Register an element for the driver.
+     *
+     * @param string           $name    Driver name.
+     * @param ElementInterface $element An instance of a ElementInterface.
+     */
+    public function registerElement($name, ElementInterface $element)
     {
-        die(var_dump($element));  // I need to get the short name of the element here somehow for hte arrayacess magic.
-        $elements[] = $element;
+        $this->elements[$name] = $element;
     }
 }
