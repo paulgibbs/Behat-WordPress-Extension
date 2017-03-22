@@ -68,7 +68,6 @@ class WpapiDriver extends BaseDriver
         $this->is_bootstrapped = true;
     }
 
-
     /*
      * Internal helpers.
      */

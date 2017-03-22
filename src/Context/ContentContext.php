@@ -13,7 +13,7 @@ class ContentContext extends RawWordpressContext
      *
      * Example: Given there are posts:
      *     | post_type | post_title | post_content | post_status |
-     *     | page      | Tes Post   | Hello World  | publish     |
+     *     | page      | Test Post   | Hello World  | publish     |
      *
      * @Given /^(?:there are|there is a) posts?:/
      *
@@ -31,16 +31,25 @@ class ContentContext extends RawWordpressContext
      *
      * Example: Given I am viewing a post:
      *     | post_type | post_title | post_content | post_status |
-     *     | page      | Tes Post   | Hello World  | publish     |
+     *     | page      | Test Post   | Hello World  | publish     |
      *
-     * @Given /^(?:I am|they are) viewing a (?:blog) post:/
+     * @Given /^(?:I am|they are) viewing a(?: blog)? post(?: "([^"]+)"|:)/
      *
-     * @param TableNode $post_data
+     * @param TableNode|string $post_data
      */
-    public function iAmViewingBlogPost(TableNode $post_data)
+    public function iAmViewingBlogPost($post_data_or_title)
     {
-        $post = $this->createContent($this->parseArgs($post_data->getHash()));
-        $this->visitPath(sprintf('?p=%d', (int) $post['id']));
+        // Retrieve the first row only
+        if ($post_data_or_title instanceof TableNode) {
+            $post_data_hash = $post_data_or_title->getHash();
+            if (count($post_data_hash) > 1) {
+                throw new \UnexpectedValueException('"Given I am viewing a post:" step must only contain one post');
+            }
+            $post = $this->createContent($this->parseArgs($post_data_hash[0]));
+        } else {
+            $post = $this->getDriver()->getContentFromTitle($post_data_or_title);
+        }
+        $this->visitPath($post['url']);
     }
 
     /**

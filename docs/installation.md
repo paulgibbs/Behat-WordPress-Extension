@@ -25,6 +25,7 @@ All the commands that follow are written to install from the root of your projec
 
 ```Shell
 php composer.phar require --dev paulgibbs/behat-wordpress-extension="dev-master"
+php composer.phar require --dev behat/mink-goutte-driver
 ```
 
 This will create a `composer.json` file for you, and download the extension.
