@@ -1,12 +1,12 @@
 <?php
 namespace PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli;
 
-use PaulGibbs\WordpressBehatExtension\Driver\Element\ElementInterface;
+use PaulGibbs\WordpressBehatExtension\Driver\Element\BaseElement;
 
 /**
  * yolo.
  */
-class ContentElement implements ElementInterface
+class ContentElement extends BaseElement
 {
     /**
      * Create an item for this element.
