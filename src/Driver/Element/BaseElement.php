@@ -15,15 +15,15 @@ abstract class BaseElement implements ElementInterface
      *
      * @var WordpressDriverManager
      */
-    protected $wordpress;
+    protected $drivers;
 
     /**
      * Constructor.
      *
-     * @param WordpressDriverManager $wordpress
+     * @param WordpressDriverManager $drivers
      */
-    public function __construct(WordpressDriverManager $wordpress)
+    public function __construct(WordpressDriverManager $drivers)
     {
-        $this->wordpress = $wordpress;
+        $this->drivers = $drivers;
     }
 }
