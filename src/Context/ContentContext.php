@@ -35,7 +35,7 @@ class ContentContext extends RawWordpressContext
      *
      * @Given /^(?:I am|they are) viewing a(?: blog)? post(?: "([^"]+)"|:)/
      *
-     * @param TableNode|string $post_data
+     * @param TableNode|string $post_data_or_title
      */
     public function iAmViewingBlogPost($post_data_or_title)
     {

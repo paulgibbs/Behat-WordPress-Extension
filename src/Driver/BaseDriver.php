@@ -42,6 +42,8 @@ abstract class BaseDriver implements DriverInterface
 
     /**
      * Has the driver has been bootstrapped?
+     *
+     * @return bool
      */
     public function isBootstrapped()
     {

@@ -15,7 +15,8 @@ trait PageObjectContextTrait
     private $page_object_factory = null;
 
     /**
-     * Creates a page object from its name
+     * Creates a page object from its name.
+     *
      * @param string $name The name of the page object e.g 'Admin page'
      * @return Page
      * @throws \RuntimeException
@@ -30,7 +31,8 @@ trait PageObjectContextTrait
     }
 
     /**
-         * Creates a page object element from its name
+     * Creates a page object element from its name.
+     *
      * @param string $name The name of the page object element e.g 'Toolbar'
      * @return Element
      * @throws \RuntimeException
@@ -45,7 +47,8 @@ trait PageObjectContextTrait
     }
 
     /**
-         * Sets the factory for creating page and element objects
+     * Sets the factory for creating page and element objects.
+     *
      * @param PageObjectFactory $page_object_factory
      */
     public function setPageObjectFactory(PageObjectFactory $page_object_factory)
@@ -54,7 +57,8 @@ trait PageObjectContextTrait
     }
 
     /**
-     * Returns the factory used for creating page and element objects
+     * Returns the factory used for creating page and element objects.
+     *
      * @return PageObjectFactory
      */
     public function getPageObjectFactory()

@@ -62,7 +62,7 @@ class Toolbar extends Element
      * seperately. Otherwise we compoare the link text to the text of the
      * element.
      *
-     * @param NodeElement $element The element to check
+     * @param \Behat\Mink\Element\NodeElement $element The element to check
      * @param string $link_text The link (text) to check for
      * @return bool True if $link_text refers to $element. False otherwise.
      */
@@ -91,9 +91,9 @@ class Toolbar extends Element
      * Retruns a second-level toolbar NodeElement corresponding to the link text
      * under the given first-level toolbar NodeElement.
      *
-     * @param NodeElement $first_level_item The element to check under
+     * @param \Behat\Mink\Element\NodeElement $first_level_item The element to check under
      * @param string $link_text The link (text) to check for
-     * @return NodeElement|null
+     * @return \Behat\Mink\Element\NodeElement|null
      */
     protected function getSubmenuLinkNode($first_level_item, $link_text)
     {

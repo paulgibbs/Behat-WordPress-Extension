@@ -119,7 +119,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      * Get active WordPress Driver.
      *
      * @param string $name Optional. Name of specific driver to retrieve.
-     * @return PaulGibbs\WordpressBehatExtension\Driver\WordpressDriver
+     * @return PaulGibbs\WordpressBehatExtension\Driver\DriverInterface
      */
     public function getDriver($name = '')
     {
