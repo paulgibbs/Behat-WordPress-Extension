@@ -25,6 +25,8 @@ interface ElementInterface
      *
      * @param int|string $id   Object ID.
      * @param array      $args Data used to fetch an object.
+     *
+     * @return mixed The item.
      */
     public function get($id, $args);
 
