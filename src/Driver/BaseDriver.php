@@ -29,7 +29,7 @@ abstract class BaseDriver implements DriverInterface
      * Expose $elements as public properties.
      *
      * @param string $name Element name.
-     * @return ElementInterface|null Return object, or null if it doesn't exist.
+     * @return ElementInterface|null Return element object.
      */
     public function __get($name)
     {
@@ -37,7 +37,7 @@ abstract class BaseDriver implements DriverInterface
             return $this->elements[$name];
         }
 
-        return null;
+        throw new UnsupportedDriverActionException(sprintf('use the %s element', static::class));
     }
 
     /**
