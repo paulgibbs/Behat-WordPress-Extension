@@ -1,0 +1,13 @@
+parameters:
+  wordpress.driver.custom.class: PaulGibbs\WordpressBehatExtension\Driver\CustomDriver
+
+services:
+  wordpress.driver.custom:
+    class: %wordpress.driver.custom.class%
+    arguments:
+      - %wordpress.driver.wpcli.alias%
+      - %wordpress.path%
+      - %mink.base_url%
+      - %wordpress.driver.wpcli.binary%
+    tags:
+      - { name: wordpress.driver, alias: custom }

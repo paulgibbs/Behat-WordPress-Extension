@@ -73,10 +73,8 @@ class WordpressBehatExtension implements ExtensionInterface
         $builder
             ->children()
                 // Common settings.
-                ->enumNode('default_driver')
-                    ->values(['wpcli', 'wpapi', 'blackbox'])
-                    ->defaultValue('wpcli')
-                ->end()
+                ->scalarNode('default_driver')->defaultValue('wpcli')->end()
+                ->scalarNode('custom_driver')->end()
                 ->scalarNode('path')->end()
 
                 // WordPress' "siteurl" option.
@@ -195,6 +193,11 @@ class WordpressBehatExtension implements ExtensionInterface
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/config'));
         $loader->load('services.yml');
+
+        if (isset($config['custom_driver'])) {
+            $file = $container->getParameterBag()->resolveValue($config['custom_driver']);
+            $loader->load($file);
+        }
 
         $container->setParameter('wordpress.wordpress.default_driver', $config['default_driver']);
         $container->setParameter('wordpress.path', $config['path']);

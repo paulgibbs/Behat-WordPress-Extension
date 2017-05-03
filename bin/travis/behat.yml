@@ -26,6 +26,8 @@ default:
 
     PaulGibbs\WordpressBehatExtension:
       path: www
+      default_driver: custom
+      custom_driver: %paths.base%/drivers/custom.yml
       users:
         admin:
           username: admin
