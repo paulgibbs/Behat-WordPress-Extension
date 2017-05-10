@@ -117,4 +117,16 @@ class WordpressContext extends RawWordpressContext implements PageObjectAware
     {
         $this->getElement('Toolbar')->clickToolbarLink($link);
     }
+
+    /**
+     * A site_url-aware version of Mink's "I am on..." step.
+     *
+     * Example: Given I am on "readme.txt" from the site root.
+     *
+     * @Given I am on :url from the site root
+     */
+    public function iAmOnURLFromSiteRoot($url)
+    {
+        $this->visitPath($url);
+    }
 }
