@@ -52,6 +52,10 @@ class WpcliDriver extends BaseDriver
     {
         $this->alias = ltrim($alias, '@');
         $this->path  = realpath($path);
+        // don't use realpath if it doesn't resolve to a valid path
+        if( false === $this->path ) {
+            $this->path = $path;
+        }
         $this->url   = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
 
         // Support Windows.
