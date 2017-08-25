@@ -1,0 +1,35 @@
+clone_folder: c:\projects\behat
+build: off
+platform: x86
+skip_tags: true
+version: '{branch}.{build}'
+
+services:
+  - mysql
+  - iis
+
+branches:
+  except:
+    - gh-pages
+
+cache:
+  #- c:\tools\php -> appveyor.yml
+  - '%LOCALAPPDATA%\Composer\files'
+  - c:\ProgramData\chocolatey\bin -> appveyor.yml
+  - c:\ProgramData\chocolatey\lib -> appveyor.yml
+
+init:
+  - SET PATH=%PATH%
+  - SET COMPOSER_NO_INTERACTION=1
+  - git config --global core.autocrlf input
+
+install:
+  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command .\bin\install1.ps1
+
+test_script:
+  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command .\bin\install2.ps1
+  #- cd c:\projects\behat
+  #- vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

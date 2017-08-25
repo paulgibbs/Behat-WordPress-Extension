@@ -1,0 +1,78 @@
+version: '{branch}.{build}'
+platform: x86
+clone_folder: c:\projects\behat
+build: off
+skip_tags: true
+
+services:
+  - mysql
+  - iis
+
+branches:
+  except:
+    - gh-pages
+
+cache:
+  - c:\tools\php -> appveyor.yml
+  - '%LOCALAPPDATA%\Composer\files'
+  - c:\ProgramData\chocolatey\bin -> appveyor.yml
+  - c:\ProgramData\chocolatey\lib -> appveyor.yml
+
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - SET PATH=%systemroot%\system32\inetsrv\;C:\Program Files\OpenSSL;c:\tools\php;C:\Program Files\MySQL\MySQL Server 5.7\bin;%PATH%
+  - SET COMPOSER_NO_INTERACTION=1
+  - SET PHP=1
+  - SET ANSICON=121x90 (121x90)
+  - git config --global core.autocrlf input
+
+install:
+  # OpenSSL and PHP.
+  - IF EXIST c:\tools\php (SET PHP=0)
+  - IF %PHP%==1 cinst -y OpenSSL.Light
+  - IF %PHP%==1 cinst -y php --allow-empty-checksums --version 7.0.9
+  - cd c:\tools\php
+  - IF %PHP%==1 echo @php %%~dp0composer.phar %%* > composer.bat
+  - appveyor DownloadFile https://getcomposer.org/composer.phar
+  - IF %PHP%==1 copy php.ini-production php.ini /Y
+  - IF %PHP%==1 echo date.timezone="UTC" >> php.ini
+  - IF %PHP%==1 echo extension_dir=ext >> php.ini
+  - IF %PHP%==1 echo extension=php_openssl.dll >> php.ini
+  - IF %PHP%==1 echo extension=php_mbstring.dll >> php.ini
+  - IF %PHP%==1 echo extension=php_fileinfo.dll >> php.ini
+  - IF %PHP%==1 echo extension=php_curl.dll >> php.ini
+  - IF %PHP%==1 echo extension=php_mysqli.dll >> php.ini
+
+  # Install WordHat.
+  - cd c:\projects\behat
+  - composer install --no-interaction --prefer-dist --no-progress
+
+  # Download WordPress.
+  - mkdir c:\projects\wordpress
+  - vendor\bin\wp core download --force --version=latest --path=c:\projects\wordpress
+  - echo 127.0.0.1 localhost >> %WINDIR%\System32\Drivers\Etc\Hosts
+  - echo 127.0.0.1 wordpress.dev >> %WINDIR%\System32\Drivers\Etc\Hosts
+
+test_script:
+  # Install WordPress (MySQL service starts after `install`).
+  - vendor\bin\wp core config --path=c:\projects\wordpress --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1
+  - vendor\bin\wp db create --path=c:\projects\wordpress
+  - vendor\bin\wp core install --path=c:\projects\wordpress --url="wordpress.dev" --title="wordpress.dev" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
+
+  # IIS.
+  - choco install -y urlrewrite
+  - powershell -command "New-WebSite -Name 'WordPress' -PhysicalPath 'c:\projects\wordpress' -HostHeader 'wordpress.dev' -Force"
+
+  # FastCGI.
+  - appcmd set config -section:anonymousAuthentication /username:"" --password
+  - appcmd set config /section:system.webServer/fastCGI /+[fullPath='C:\tools\php\php-cgi.exe']
+  - appcmd set config /section:system.webServer/handlers /+[name='PHP-FastCGI',path='*.php',verb='*',modules='FastCgiModule',scriptProcessor='C:\tools\php\php-cgi.exe',resourceType='Either']
+
+  # Check it works.
+  - iisreset
+  - powershell -command "wget http://wordpress.dev"
+  #- cd c:\projects\behat
+  #- vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

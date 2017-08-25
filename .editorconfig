@@ -17,5 +17,5 @@ indent_size = 2
 [*.php]
 indent_size = 4
 
-[{*.txt,*.md}]
+[{*.txt,*.md,*.ps1}]
 end_of_line = crlf
