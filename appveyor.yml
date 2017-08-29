@@ -24,11 +24,30 @@ init:
   - git config --global core.autocrlf input
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
 
+# BEFORE services (IIS, etc) are launched.
 install:
-  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command ".\bin\install1.ps1"
+  # Install WebPI.
+  - cInst webpicommandline -y
+
+  # Install environment dependencies via WebPI.
+  - WebPICMD /Install /Application:"PHP70" /AcceptEULA
+
+  - echo (Get-Website -Name "Default Web Site").PhysicalPath
+  - echo (get-webapplication foo).PhysicalPath
+  - echo @php %%~dp0composer.phar %%* > composer.bat
+  - appveyor DownloadFile https://getcomposer.org/composer.phar
+
+  # Start Windows services for IIS.
+  - Start-Service W3SVC
+  - Start-Service WAS
+
+  # Install WordHat dependencies.
+  - cd $APPVEYOR_BUILD_FOLDER
+  - composer install --no-interaction --prefer-dist --no-progress
+
 
 test_script:
-  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command ".\bin\install2.ps1"
+  #- cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command ".\bin\install2.ps1"
   #- cd c:\projects\behat
   #- vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
 
