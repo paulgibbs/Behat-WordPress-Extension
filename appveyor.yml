@@ -30,16 +30,16 @@ install:
   - cInst webpicommandline -y
 
   # Install environment dependencies via WebPI.
-  - WebPICMD /Install /Application:"PHP70" /AcceptEULA
+  - WebPICMD /Install /Products:"PHP70" /AcceptEULA
 
-  - echo (Get-Website -Name "Default Web Site").PhysicalPath
-  - echo (get-webapplication foo).PhysicalPath
+  - (Get-Website -Name "Default Web Site").PhysicalPath
+  - (get-webapplication foo).PhysicalPath
   - echo @php %%~dp0composer.phar %%* > composer.bat
   - appveyor DownloadFile https://getcomposer.org/composer.phar
 
   # Start Windows services for IIS.
-  - Start-Service W3SVC
-  - Start-Service WAS
+  #- Start-Service W3SVC
+  #- Start-Service WAS
 
   # Install WordHat dependencies.
   - cd $APPVEYOR_BUILD_FOLDER
