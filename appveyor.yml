@@ -2,7 +2,7 @@ clone_folder: c:\projects\behat
 build: off
 platform: x86
 skip_tags: true
-version: '{branch}.{build}'
+version: '{build}'
 
 services:
   - mysql
@@ -22,6 +22,7 @@ init:
   - SET PATH=%PATH%
   - SET COMPOSER_NO_INTERACTION=1
   - git config --global core.autocrlf input
+  - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
 
 install:
   - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command .\bin\install1.ps1
