@@ -25,10 +25,10 @@ init:
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
 
 install:
-  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command c:\projects\behat\bin\install1.ps1
+  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command ".\bin\install1.ps1"
 
 test_script:
-  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command c:\projects\behat\bin\install2.ps1
+  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command ".\bin\install2.ps1"
   #- cd c:\projects\behat
   #- vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
 
