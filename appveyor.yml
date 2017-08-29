@@ -32,7 +32,8 @@ install:
   # Install environment dependencies via WebPI.
   - WebPICMD /Install /Products:"PHP70" /AcceptEULA
 
-  - Get-Website -Name "Default Web Site"
+  - ps: (Get-Website -Name "Default Web Site").PhysicalPath
+  - ps: (get-webapplication "Default Web Site").PhysicalPath
   - echo @php %%~dp0composer.phar %%* > composer.bat
   - appveyor DownloadFile https://getcomposer.org/composer.phar
 
