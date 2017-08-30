@@ -31,7 +31,6 @@ install:
 
   # Install environment dependencies via WebPI.
   - WebPICMD /Install /Products:"PHP70" /AcceptEULA
-  - RefreshEnv
 
   #- ps: (Get-Website -Name "Default Web Site").PhysicalPath
   # %SystemDrive%\inetpub\wwwroot
@@ -45,6 +44,7 @@ install:
   # Start Windows services for IIS.
   - ps: Start-Service W3SVC
   - ps: Start-Service WAS
+  - RefreshEnv
 
   # Install WordHat dependencies.
   - type composer.bat
