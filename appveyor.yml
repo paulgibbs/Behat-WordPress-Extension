@@ -51,7 +51,6 @@ install:
 
 # AFTER services (IIS, etc) have been launched.
 test_script:
-  - RefreshEnv
   - cd "%APPVEYOR_BUILD_FOLDER%"
   - vendor\bin\wp db create --path=c:\inetpub\wwwroot
   - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
