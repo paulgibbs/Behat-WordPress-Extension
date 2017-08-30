@@ -31,6 +31,7 @@ install:
 
   # Install environment dependencies via WebPI.
   - WebPICMD /Install /Products:"PHP70" /AcceptEULA
+  - RefreshEnv
 
   #- ps: (Get-Website -Name "Default Web Site").PhysicalPath
   # %SystemDrive%\inetpub\wwwroot
@@ -47,7 +48,7 @@ install:
 
   # Install WordHat dependencies.
   - type composer.bat
-  - php composer.phar install --no-interaction --prefer-dist --no-progress
+  - composer install --no-interaction --prefer-dist --no-progress
 
 
 test_script:
