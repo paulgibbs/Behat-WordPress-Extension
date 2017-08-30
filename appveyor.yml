@@ -44,14 +44,15 @@ install:
   - composer install --no-interaction --prefer-dist --no-progress
 
   # Install WordPress.
-  - vendor\bin\wp core download --force --version=latest --path=c:\inetpub\wwwroot
-  - vendor\bin\wp core config --path=c:\inetpub\wwwroot --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1 --skip-check
+  - del /s /q c:\inetpub\wwwroot\*.*
+  - for /d %i in (c:\inetpub\wwwroot\*.*) do @rmdir /s /q "%i"
+  - dir c:\inetpub\wwwroot\*.*
+  #- vendor\bin\wp core download --force --version=latest --path=c:\inetpub\wwwroot
+  #- vendor\bin\wp core config --path=c:\inetpub\wwwroot --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1 --skip-check
 
 # AFTER services (IIS, etc) have been launched.
 test_script:
-  - del /s /q /f c:\inetpub\wwwroot\*.*
-  - dir c:\inetpub\wwwroot\*.*
-  #- cd "%APPVEYOR_BUILD_FOLDER%"
+  - cd "%APPVEYOR_BUILD_FOLDER%"
   #- vendor\bin\wp db create --path=c:\inetpub\wwwroot
   #- vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
