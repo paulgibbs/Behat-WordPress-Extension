@@ -36,9 +36,9 @@ install:
   # %SystemDrive%\inetpub\wwwroot
 
   # Install Composer.
-  - cd
-  - echo @php %%~dp0composer.phar %%* > composer.bat
   - appveyor DownloadFile https://getcomposer.org/composer.phar
+  - ps: $wh_cwd = (Get-Item -Path ".\" -Verbose).FullName;
+  - ps: Add-Content composer.bat "@php $wh_cwd\composer.phar"
 
   # Start Windows services for IIS.
   - ps: Start-Service W3SVC
