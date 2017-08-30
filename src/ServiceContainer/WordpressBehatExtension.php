@@ -79,7 +79,6 @@ class WordpressBehatExtension implements ExtensionInterface
                     ->defaultValue('wpcli')
                 ->end()
                 ->scalarNode('path')
-                    ->addDefaultsIfNotSet()
                     ->defaultValue('')
                 ->end()
 
