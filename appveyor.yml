@@ -34,22 +34,26 @@ install:
   - appveyor DownloadFile https://getcomposer.org/composer.phar
   - ps: $wh_cwd = (Get-Item -Path ".\" -Verbose).FullName;
   - ps: Add-Content composer.bat "@php $wh_cwd\composer.phar %*"
+  - RefreshEnv
 
   # Start Windows services for IIS.
   - ps: Start-Service W3SVC
   - ps: Start-Service WAS
 
   # Install WordHat dependencies.
-  - RefreshEnv
   - composer install --no-interaction --prefer-dist --no-progress
 
+  # Install WordPress.
+  - vendor\bin\wp core download --force --version=latest --path=c:\inetpub\wwwroot
+  - vendor\bin\wp core config --path=c:\inetpub\wwwroot --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1 --skip-check
 
 # AFTER services (IIS, etc) have been launched.
 test_script:
-  - cd "%APPVEYOR_BUILD_FOLDER%"
-  - vendor\bin\wp core config --path=c:\inetpub\wwwroot --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1
-  - vendor\bin\wp db create --path=c:\inetpub\wwwroot
-  - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
+  - del /s /q /f c:\inetpub\wwwroot\*.*
+  - dir c:\inetpub\wwwroot\*.*
+  #- cd "%APPVEYOR_BUILD_FOLDER%"
+  #- vendor\bin\wp db create --path=c:\inetpub\wwwroot
+  #- vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
 on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
