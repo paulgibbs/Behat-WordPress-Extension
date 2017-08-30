@@ -37,6 +37,7 @@ install:
 
   # Install Composer.
   - appveyor DownloadFile https://getcomposer.org/composer.phar
+  - cd "%APPVEYOR_BUILD_FOLDER%"
   - ps: $wh_cwd = (Get-Item -Path ".\" -Verbose).FullName;
   - ps: Add-Content composer.bat "@php $wh_cwd\composer.phar"
 
@@ -45,7 +46,6 @@ install:
   - ps: Start-Service WAS
 
   # Install WordHat dependencies.
-  - cd "%APPVEYOR_BUILD_FOLDER%"
   - composer install --no-interaction --prefer-dist --no-progress
 
 
