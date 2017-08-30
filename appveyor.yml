@@ -13,7 +13,6 @@ branches:
     - gh-pages
 
 cache:
-  #- c:\tools\php -> appveyor.yml
   - '%LOCALAPPDATA%\Composer\files'
   - c:\ProgramData\chocolatey\bin -> appveyor.yml
   - c:\ProgramData\chocolatey\lib -> appveyor.yml
@@ -26,14 +25,9 @@ init:
 
 # BEFORE services (IIS, etc) are launched.
 install:
-  # Install WebPI.
-  - cInst webpicommandline -y
-
   # Install environment dependencies via WebPI.
+  - cInst webpicommandline -y
   - WebPICMD /Install /Products:"PHP70" /AcceptEULA
-
-  #- ps: (Get-Website -Name "Default Web Site").PhysicalPath
-  # %SystemDrive%\inetpub\wwwroot
 
   # Install Composer.
   - cd "%APPVEYOR_BUILD_FOLDER%"
@@ -44,17 +38,18 @@ install:
   # Start Windows services for IIS.
   - ps: Start-Service W3SVC
   - ps: Start-Service WAS
-  - RefreshEnv
 
   # Install WordHat dependencies.
-  - type composer.bat
+  - RefreshEnv
   - composer install --no-interaction --prefer-dist --no-progress
 
 
+# AFTER services (IIS, etc) have been launched.
 test_script:
-  #- cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command ".\bin\install2.ps1"
-  #- cd c:\projects\behat
-  #- vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
+  - cd "%APPVEYOR_BUILD_FOLDER%"
+  - vendor\bin\wp core config --path=c:\inetpub\wwwroot --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1
+  - vendor\bin\wp db create --path=c:\inetpub\wwwroot
+  - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
