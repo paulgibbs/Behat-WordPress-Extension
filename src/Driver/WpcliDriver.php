@@ -50,20 +50,14 @@ class WpcliDriver extends BaseDriver
      */
     public function __construct($alias, $path, $url, $binary)
     {
-        $this->alias = ltrim($alias, '@');
-        $this->path  = $path ? realpath($path) : '';
-        $this->url   = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
+        $this->alias  = ltrim($alias, '@');
+        $this->path   = $path ? realpath($path) : '';
+        $this->url    = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
+        $this->binary = $binary;
 
         // Path can be relative.
         if (! $this->path) {
             $this->path = $path;
-        }
-
-        // Support Windows.
-        if ($binary === null && DIRECTORY_SEPARATOR === '\\') {
-            $this->binary = 'wp.bat';
-        } elseif ($binary !== null) {
-            $this->binary = $binary;
         }
     }
 
