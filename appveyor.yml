@@ -43,7 +43,7 @@ install:
   # Install WordHat dependencies.
   - composer install --no-interaction --prefer-dist --no-progress
 
-  # Install WordPress.
+  # Download WordPress and configure.
   - del /s /q c:\inetpub\wwwroot\*.*
   - for /d %%i in (c:\inetpub\wwwroot\*.*) do @rmdir /s /q "%%i"
   - vendor\bin\wp core download --force --version=latest --path=c:\inetpub\wwwroot
@@ -51,9 +51,13 @@ install:
 
 # AFTER services (IIS, etc) have been launched.
 test_script:
+  # Install WordPress.
   - cd "%APPVEYOR_BUILD_FOLDER%"
   - vendor\bin\wp db create --path=c:\inetpub\wwwroot
   - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # Run WordHat.
+  - vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
+
+#on_finish:
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
