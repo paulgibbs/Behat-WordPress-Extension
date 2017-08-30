@@ -46,7 +46,7 @@ install:
   # Install WordPress.
   - del /s /q c:\inetpub\wwwroot\*.*
   - for /d %%i in (c:\inetpub\wwwroot\*.*) do @rmdir /s /q "%%i"
-  - dir c:\inetpub\wwwroot\*.*
+  - dir c:\inetpub\wwwroot
   #- vendor\bin\wp core download --force --version=latest --path=c:\inetpub\wwwroot
   #- vendor\bin\wp core config --path=c:\inetpub\wwwroot --dbname=wordpress --dbuser=root --dbpass=Password12! --dbhost=127.0.0.1 --skip-check
 
