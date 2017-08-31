@@ -57,7 +57,7 @@ test_script:
   - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
   # Run WordHat.
-  - SET BEHAT_PARAMS={"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"%paths.base%\\..\\..\\vendor\\bin\\wp"}}}}
+  - SET BEHAT_PARAMS={"extensions":{"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","wpcli":{"binary":"c:\\projects\\behat\\vendor\\bin\\wp"}}}}
   - vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
 
 #on_finish:
