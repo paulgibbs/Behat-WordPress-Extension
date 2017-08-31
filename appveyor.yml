@@ -1,6 +1,7 @@
 clone_folder: c:\projects\behat
 build: off
 platform: x86
+shallow_clone: true
 skip_tags: true
 version: '{build}'
 
@@ -42,6 +43,8 @@ install:
 
   # Install WordHat dependencies.
   - composer install --no-interaction --prefer-dist --no-progress
+  - appveyor DownloadFile https://goo.gl/hWYjHR
+  - ps: Start-Process selenium-standalone 'start', '--', '-Djna.nosys=true'
 
   # Download WordPress and configure.
   - del /s /q c:\inetpub\wwwroot\*.*
