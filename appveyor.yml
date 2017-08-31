@@ -49,7 +49,7 @@ install:
   - composer install --no-interaction --prefer-dist --no-progress
 
   # Run Selenium.
-  - javaw -jar c:\projects\behat-tools\selenium.jar -port 4444
+  - start /B javaw -jar c:\projects\behat-tools\selenium.jar -port 4444
 
   # Download WordPress and configure.
   - del /s /q c:\inetpub\wwwroot\*.*
