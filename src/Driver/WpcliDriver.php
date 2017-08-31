@@ -55,6 +55,12 @@ class WpcliDriver extends BaseDriver
         $this->url    = rtrim(filter_var($url, FILTER_SANITIZE_URL), '/');
         $this->binary = $binary;
 
+        echo 'setting constructor';
+        echo $this->alias . PHP_EOL;
+        echo $this->path . PHP_EOL;
+        echo $this->url . PHP_EOL;
+        echo $this->binary . PHP_EOL;
+
         // Path can be relative.
         if (! $this->path) {
             $this->path = $path;
