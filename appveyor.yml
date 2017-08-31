@@ -57,8 +57,7 @@ test_script:
   - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
   # Run WordHat.
-  - setx BEHAT_PARAMS {"extensions":{"Behat\\MinkExtension":{"base_url":"http://localhost"},"PaulGibbs\\WordpressBehatExtension":{"default_driver":"wpcli","path":"c:\\inetpub\\wwwroot","wpcli":{"binary":"c:\\projects\\behat\\vendor\\bin\\wp"}}}}
-  - vendor\bin\behat --tags="~@javascript" --format=progress --config bin\travis\behat.yml
+  - vendor\bin\behat --tags="~@javascript" --format=progress --config bin\appveyor\behat.yml
 
 #on_finish:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

@@ -1,0 +1,38 @@
+default:
+  suites:
+    default:
+      paths:
+        - %paths.base%/../../features
+      contexts:
+        - Behat\MinkExtension\Context\MinkContext
+        - PaulGibbs\WordpressBehatExtension\Context\ContentContext
+        - PaulGibbs\WordpressBehatExtension\Context\DashboardContext
+        - PaulGibbs\WordpressBehatExtension\Context\SiteContext
+        - PaulGibbs\WordpressBehatExtension\Context\UserContext
+        - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
+        - PaulGibbs\WordpressBehatExtension\Context\EditPostContext
+        - PaulGibbs\WordpressBehatExtension\Context\WidgetContext
+        - PaulGibbs\WordpressBehatExtension\Context\ToolbarContext
+
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://localhost
+      default_session: default
+      javascript_session: selenium2
+      sessions:
+        default:
+          goutte:
+            guzzle_parameters:
+              verify: false  # Allow self-signed SSL certificates
+        selenium2:
+          selenium2: ~
+
+    PaulGibbs\WordpressBehatExtension:
+      path: c:\inetpub\wwwroot
+      default_driver: wpcli
+      wpcli:
+        binary: c:\projects\behat\vendor\bin\wp
+      users:
+        admin:
+          username: admin
+          password: password
