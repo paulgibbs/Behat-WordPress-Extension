@@ -20,7 +20,7 @@ cache:
   - c:\projects\behat-tools -> appveyor.yml
 
 init:
-  - set PATH=c:\projects\behat-tools;C:\Program Files\MySQL\MySQL Server 5.7\bin;%PATH%
+  - set PATH=c:\projects\behat-tools;C:\Program Files\Java\jdk1.8.0\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;%PATH%
   - setx COMPOSER_NO_INTERACTION 1
   - git config --global core.autocrlf input
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
@@ -69,3 +69,4 @@ test_script:
 
 #on_finish:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#if(-not (Test-Path $destPath)) { }
