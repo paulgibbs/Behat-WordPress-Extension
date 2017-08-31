@@ -43,7 +43,9 @@ install:
 
   # Install WordHat dependencies.
   - composer install --no-interaction --prefer-dist --no-progress
-  - appveyor DownloadFile https://goo.gl/hWYjHR
+
+  # Install and run Selenium.
+  - ps: Start-FileDownload http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
   - ps: Start-Process selenium-standalone 'start', '--', '-Djna.nosys=true'
 
   # Download WordPress and configure.
