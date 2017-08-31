@@ -65,7 +65,7 @@ test_script:
   - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
   # Run WordHat.
-  - vendor\bin\behat --tags="~@javascript" --format=progress --config bin\appveyor\behat.yml
+  - vendor\bin\behat --format=progress --config bin\appveyor\behat.yml
 
 on_finish:
   - ps: Stop-Process -Id $wh_selenium.Id
