@@ -118,6 +118,7 @@ class WpcliDriver extends BaseDriver
             $config = "@{$this->alias}";
         }
 
+        echo "{$this->binary} {$config} --no-color {$command} {$subcommand} {$arguments}";
         // Query WP-CLI.
         $proc = proc_open(
             "{$this->binary} {$config} --no-color {$command} {$subcommand} {$arguments}",
