@@ -49,7 +49,7 @@ install:
   - composer install --no-interaction --prefer-dist --no-progress
 
   # Run Selenium.
-  - start /B javaw -jar c:\projects\behat-tools\selenium.jar -port 4444
+  - cmd /c javaw -jar c:\projects\behat-tools\selenium.jar -port 4444
 
   # Download WordPress and configure.
   - del /s /q c:\inetpub\wwwroot\*.*
@@ -70,3 +70,4 @@ test_script:
 #on_finish:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 #if(-not (Test-Path $destPath)) { }
+#https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml
