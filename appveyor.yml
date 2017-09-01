@@ -1,5 +1,5 @@
-clone_folder: c:\projects\behat
 build: off
+clone_folder: c:\projects\wordhat
 platform: x86
 shallow_clone: true
 skip_tags: true
@@ -17,30 +17,29 @@ cache:
   - '%LOCALAPPDATA%\Composer\files'
   - c:\ProgramData\chocolatey\bin -> appveyor.yml
   - c:\ProgramData\chocolatey\lib -> appveyor.yml
-  - c:\projects\behat-tools -> appveyor.yml
+  - c:\projects\wordhat-tools -> appveyor.yml
 
 init:
-  - set PATH=c:\projects\behat-tools;C:\Program Files\Java\jdk1.8.0\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;%PATH%
+  - set PATH=c:\projects\wordhat-tools;C:\Program Files\Java\jdk1.8.0\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;%PATH%
   - setx COMPOSER_NO_INTERACTION 1
   - git config --global core.autocrlf input
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
 
 # BEFORE services (IIS, etc) are launched.
 install:
-  # Install environment dependencies via WebPI.
+  # Install PHP via WebPI.
   - cInst webpicommandline -y
   - WebPICMD /Install /Products:"PHP70" /AcceptEULA
 
   # Install Composer and Selenium.
-  - mkdir c:\projects\behat-tools
-  - cd c:\projects\behat-tools
-  - ps: Invoke-WebRequest http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar -Outfile c:\projects\behat-tools\selenium.jar
-  - appveyor DownloadFile https://getcomposer.org/composer.phar
-  - ps: $wh_cwd = (Get-Item -Path ".\" -Verbose).FullName;
-  - ps: Add-Content composer.bat "@php $wh_cwd\composer.phar %*"
+  - mkdir c:\projects\wordhat-tools
+  - cd c:\projects\wordhat-tools
+  #- ps: Invoke-WebRequest http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar -Outfile selenium.jar
+  - ps: Invoke-WebRequest https://getcomposer.org/composer.phar  -Outfile composer.phar
+  - Add-Content composer.bat "@php c:\projects\wordhat-tools\composer.phar %*"
   - RefreshEnv
 
-  # Start Windows services for IIS.
+  # Make sure Windows' IIS services are running.
   - ps: Start-Service W3SVC
   - ps: Start-Service WAS
 
@@ -49,7 +48,7 @@ install:
   - composer install --no-interaction --prefer-dist --no-progress
 
   # Run Selenium.
-  - ps: $wh_selenium = Start-Process javaw "-jar c:\projects\behat-tools\selenium.jar -port 4444" -PassThru
+  #- ps: $wh_selenium = Start-Process javaw "-jar c:\projects\wordhat-tools\selenium.jar -port 4444" -PassThru
 
   # Download WordPress and configure.
   - del /s /q c:\inetpub\wwwroot\*.*
@@ -65,11 +64,10 @@ test_script:
   - vendor\bin\wp core install --path=c:\inetpub\wwwroot --url="localhost" --title="wordhat site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
 
   # Run WordHat.
-  - vendor\bin\behat --format=progress --config bin\appveyor\behat.yml
+  - vendor\bin\behat --tags="~@javascript" --format=progress --config bin\appveyor\behat.yml
 
 on_finish:
-  - ps: Stop-Process -Id $wh_selenium.Id
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-#if(-not (Test-Path $destPath)) { }
-#https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml
+  #- ps: Stop-Process -Id $wh_selenium.Id
 
+  # Enable RDP for debugging.
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
