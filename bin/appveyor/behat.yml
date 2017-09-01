@@ -31,7 +31,7 @@ default:
       path: c:\inetpub\wwwroot
       default_driver: wpcli
       wpcli:
-        binary: c:\projects\behat\vendor\bin\wp
+        binary: c:\projects\wordhat\vendor\bin\wp
       users:
         admin:
           username: admin
