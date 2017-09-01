@@ -20,7 +20,7 @@ cache:
   - c:\projects\behat-tools -> appveyor.yml
 
 init:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - set PATH=c:\projects\behat-tools;C:\Program Files\Java\jdk1.8.0\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;%PATH%
   - setx COMPOSER_NO_INTERACTION 1
   - git config --global core.autocrlf input
@@ -70,6 +70,7 @@ test_script:
 
 on_finish:
   - ps: Stop-Process -Id $wh_selenium.Id
+  - ps: $blockRdp = $true;
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 #if(-not (Test-Path $destPath)) { }
 #https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml
