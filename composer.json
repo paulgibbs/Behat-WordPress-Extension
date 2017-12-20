@@ -30,8 +30,6 @@
     "behat/behat": "~3.1",
     "php": "~7.0",
     "sensiolabs/behat-page-object-extension": "~2.1",
-    "ocramius/proxy-manager": "2.0.4",
-    "zendframework/zend-code": "3.1.0",
     "behat/mink-extension": "v2.2"
   },
   "require-dev": {
