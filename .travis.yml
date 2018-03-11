@@ -4,22 +4,22 @@ language: php
 php:
   - 7.0
   - 7.2
-  
+
 env:
   - WORDHAT_DRIVER=wpphp
   - WORDHAT_DRIVER=wpcli
-  
+
 services:
   - docker
 
 #before_cache:
-#  # Save tagged docker images
-#  - mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}' | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
+  # Save tagged docker images
+  - mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}' | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
 
 cache:
   apt: true
   directories:
- #   - $HOME/docker
+    - $HOME/docker
     - $HOME/.composer/cache/files
 
 
@@ -29,9 +29,8 @@ notifications:
     secure: UKnkI42ZBwYosQbg12QjWP1Glmkbfp9S1vAkeFS4AO6nY3Lfd3GdSHX0CjGuKtLhzWXtiH4Euza3ZGNgOiQy69OZUHTo10fhk8vFdwdoiw0phiMUVWhcB9LLKgh4B768yTPtgoucyFfvgvFrCCKy065wMTvWWouekDp8gHZgOULi9KO1nPOvqqpCYMVBowheoPLkJ2iDZtbzgvCRyDISWirn322cheROZz/AfOpnYhU6jBGrjvb5QDvX0G5VVp9lDK2X0lMq4/yMIhT2w9RL3or7h0K066y1WJYZfmoxskyJjRHBmhegmqX6q57n4b5Bg83Ec80pNQ3mwknuncOVBjiAJIW09wgf5SP14U4hfOTD3soE+0ehjIsBIvtJnxNm2uddMrD9OoeAwZVtRY1XLEMhO4ISp5NjaJXSBreVnF43ytqoKJBwWUUIg5Bp1Sck4D9edMPeqW4yWqwkhDq/L6+PRZ7VoUy2e8mZsKSOL7Wb8RmtKfZhpCrEos5XFhaRA97ke9XaV6PJuN+2UCVPVOXGPrpJXosC0SWVl7Pj5Urd7EhwpPqVRWK3YJIk6VhLFuXNgbGj3KZNG6v+ETZknlxPB5T55i9ZCQ2Beoza0+epvpiPIuAbUzdRBAHz9j4LODfHmefeZaQ7kkjdgT7d+SV4v58lSZwYdH5mb1q4j7g=
 
 #before_install:
-#  # Load cached docker images
-#  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
-#  - export WH_WORDPRESS_DIR="$WH_DIR/www/"
+  # Load cached docker images
+  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
 
 install:
   # Install all of the dependencies you need here.
