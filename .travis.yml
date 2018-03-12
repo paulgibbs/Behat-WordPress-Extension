@@ -22,7 +22,6 @@ cache:
     - $HOME/docker
     - $HOME/.composer/cache/files
 
-
 notifications:
   email: false
   slack:
