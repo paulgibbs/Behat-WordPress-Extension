@@ -87,4 +87,4 @@ on_finish:
   #- ps: Stop-Process -Id $wh_selenium.Id
 
   # Enable RDP for debugging.
-  # ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

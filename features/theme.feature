@@ -4,7 +4,7 @@ Feature: Managing themes
   I want to test managing themes
 
   Background:
-    Given I am logged in as an admin
+    Given I am logged in as an administrator
 
   @db
   Scenario: Activate a plugin

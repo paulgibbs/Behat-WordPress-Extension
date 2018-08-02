@@ -28,7 +28,7 @@ default:
         selenium2:
           selenium2:
             wd_host: ${wordhat.wd-host}
-            capabilities: 
+            capabilities:
               browser: chrome
 
     PaulGibbs\WordpressBehatExtension:
@@ -37,7 +37,9 @@ default:
       wpcli:
         binary: ${wordhat.wp-cli-binary}
       users:
-        admin:
+        -
+          roles:
+            - administrator
           username: admin
           password: password
       database:

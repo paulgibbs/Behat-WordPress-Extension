@@ -5,7 +5,7 @@ Feature: You can write in visual and text mode
   I want to test interacting with the content editor
 
   Background:
-    Given I am logged in as an admin
+    Given I am logged in as an administrator
     And there are posts:
       | post_title      | post_content              | post_status | post_author |
       | Just my article | The content of my article | publish     | admin       |

@@ -5,7 +5,7 @@ Feature: Toolbar
   I want to test interacting with the toolbar
 
   Background:
-    Given I am logged in as an admin
+    Given I am logged in as an administrator
     And I am on the homepage
 
   Scenario: I can go to the support forums
@@ -25,6 +25,6 @@ Feature: Toolbar
     Then I should see "Search results"
 
   Scenario: I can search for text within the toolbar
-    Given I am logged in as an admin
+    Given I am logged in as an administrator
     And I am on the homepage
     Then I should see "Howdy, admin" in the Toolbar

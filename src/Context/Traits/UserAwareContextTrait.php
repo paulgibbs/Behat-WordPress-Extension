@@ -141,7 +141,7 @@ trait UserAwareContextTrait
      *
      * @return object $user
      */
-    private function getExistingMatchingUser(array $args)
+    protected function getExistingMatchingUser(array $args)
     {
         $user_id = $this->getUserIdFromLogin($args['user_login']);
         $user    = $this->getDriver()->user->get($user_id);
@@ -185,20 +185,14 @@ trait UserAwareContextTrait
      *
      * @return boolean $retval True if the role does apply to the user.
      */
-    private function checkUserHasRole($user, string $role): bool
+    protected function checkUserHasRole($user, string $role): bool
     {
-        /*
-         * $user->roles can either be a string with 1 role in it or an array of roles.
-         * casting to an array means it will always be an array.
-         */
-        $roles = (array) $user->roles;
-
-        if (! in_array($role, $roles, true)) { // if its an array check the role is in that array
+        if (! in_array($role, $user->roles, true)) {
             $message = sprintf(
                 '[W804] User with login: %s exists, but role %s is not in the list of applied roles: %s',
                 $user->user_login,
                 $role,
-                $roles
+                $user->roles
             );
             throw new \UnexpectedValueException($message);
         }
@@ -213,7 +207,7 @@ trait UserAwareContextTrait
      *
      * @return boolean $retval True if the parameter does apply to a user.
      */
-    private function isValidUserParameter(string $user_parameter): bool
+    protected function isValidUserParameter(string $user_parameter): bool
     {
         $validUserParameters = array(
             'id',

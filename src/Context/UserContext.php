@@ -31,11 +31,8 @@ class UserContext extends RawWordpressContext
         foreach ($users->getHash() as $user) {
             $this->createUser($user['user_login'], $user['user_email'], $user);
 
-            // Store new users by username, not by role (unlike what the docs say).
-            $user_id = strtolower($user['user_login']);
-            $user_id = preg_replace('/[^a-z0-9_\-]/', '', $user_id);
-
-            $params['users'][$user_id] = array(
+            $params['users'][] = array(
+                'roles'    => $this->getUserDataFromUsername('roles', $user['user_login']),
                 'username' => $user['user_login'],
                 'password' => $user['user_pass'],
             );
@@ -61,25 +58,31 @@ class UserContext extends RawWordpressContext
     /**
      * Go to a user's author archive page.
      *
-     * Example: When I am viewing posts published by an admin
      * Example: When I am viewing posts published by Paul
      *
-     * @When /^(?:I am|they are) viewing posts published by (?:a |an )?(.+)$/
+     * @When /^(?:I am|they are) viewing posts published by (.+)$/
      *
-     * @param string $role
+     * @param string $username
      */
-    public function iAmViewingAuthorArchive($role)
+    public function iAmViewingAuthorArchive(string $username)
     {
-        $role  = strtolower($role);
-        $users = $this->getWordpressParameter('users');
+        $found_user = null;
+        $users      = $this->getWordpressParameter('users');
 
-        if ($users === null || empty($users[$role])) {
-            throw new RuntimeException("[W801] User details for role \"{$role}\" not found.");
+        foreach ($users as $user) {
+            if ($username === $user['username']) {
+                $found_user = $user;
+                break;
+            }
+        }
+
+        if ($found_user === null) {
+            throw new RuntimeException("[W801] User not found for name \"{$username}\"");
         }
 
         $this->visitPath(sprintf(
             $this->getWordpressParameters()['permalinks']['author_archive'],
-            $this->getUserDataFromUsername('user_nicename', $users[$role]['username'])
+            $this->getUserDataFromUsername('user_nicename', $found_user['username'])
         ));
     }
 
@@ -98,43 +101,112 @@ class UserContext extends RawWordpressContext
     }
 
     /**
-     * Log user in.
+     * Log user in (with role name).
      *
-     * Example: Given I am logged in as an admin
+     * Example: Given I am logged in as an contributor
      *
-     * @Given /^(?:I am|they are) logged in as (?:a |an )?(.+)$/
+     * @Given /^(?:I am|they are) logged in as an? (.+)$/
      *
      * @param string $role
      *
      * @throws \RuntimeException
      */
-    public function iAmLoggedInAs(string $role)
+    public function iAmLoggedInAsRole(string $role)
     {
-        $role  = strtolower($role);
-        $users = $this->getWordpressParameter('users');
+        $found_user = null;
+        $users      = $this->getWordpressParameter('users');
 
-        if ($users === null || empty($users[$role])) {
-            throw new RuntimeException("[W801] User details for role \"{$role}\" not found.");
+        foreach ($users as $user) {
+            if (in_array($role, $user['roles'], true)) {
+                $found_user = $user;
+                break;
+            }
         }
 
-        $this->logIn($users[$role]['username'], $users[$role]['password']);
+        if ($found_user === null) {
+            throw new RuntimeException("[W801] User not found for role \"{$role}\"");
+        }
+
+        $this->logIn($found_user['username'], $found_user['password']);
     }
 
     /**
-     * Try to log user in, but expect failure.
+     * Log user in (with user name).
+     *
+     * Example: Given I am logged in as Mince
+     *
+     * @Given /^(?:I am|they are) logged in as (?!an? )(.+)$/
+     *
+     * @param string $username
+     *
+     * @throws \RuntimeException
+     */
+    public function iAmLoggedInAsUser(string $username)
+    {
+        $found_user = null;
+        $users      = $this->getWordpressParameter('users');
+
+        foreach ($users as $user) {
+            if ($username === $user['username']) {
+                $found_user = $user;
+                break;
+            }
+        }
+
+        if ($found_user === null) {
+            throw new RuntimeException("[W801] User not found for name \"{$username}\"");
+        }
+
+        $this->logIn($found_user['username'], $found_user['password']);
+    }
+
+    /**
+     * Try to log user in (with role name), but expect failure.
      *
      * Example: Then I should not be able to log in as an editor
      *
-     * @Then /^(?:I|they) should not be able to log in as (?:a |an )?(.+)$/
+     * @Then /^(?:I|they) should not be able to log in as an? (.+)$/
      *
      * @param string $role
      *
      * @throws ExpectationException
      */
-    public function iShouldNotBeAbleToLogInAs($role)
+    public function iShouldNotBeAbleToLogInAsRole(string $role)
     {
         try {
-            $this->iAmLoggedInAs($role);
+            $this->iAmLoggedInAsRole($role);
+        } catch (ExpectationException $e) {
+            // Expectation fulfilled.
+            return;
+        } catch (RuntimeException $e) {
+            // Expectation fulfilled.
+            return;
+        }
+
+        throw new ExpectationException(
+            sprintf(
+                '[W802] A user with role "%s" was logged-in succesfully. This should not have happened.',
+                $role
+            ),
+            $this->getSession()->getDriver()
+        );
+    }
+
+    /**
+     * Try to log user in (with username), but expect failure.
+     *
+     * Example: Then I should not be able to log in as Scotty
+     *
+     * @Then /^(?:I|they) should not be able to log in as (.+)$/
+     *
+     * @param string $username
+     *
+     * @throws ExpectationException
+     */
+    public function iShouldNotBeAbleToLogInAsUser(string $username)
+    {
+        try {
+            $this->iAmLoggedInAsUser($username);
         } catch (ExpectationException $e) {
             // Expectation fulfilled.
             return;
@@ -146,7 +218,7 @@ class UserContext extends RawWordpressContext
         throw new ExpectationException(
             sprintf(
                 '[W802] The user "%s" was logged-in succesfully. This should not have happened.',
-                $role
+                $username
             ),
             $this->getSession()->getDriver()
         );

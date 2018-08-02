@@ -17,21 +17,14 @@ PaulGibbs\WordpressBehatExtension:
 
   # User settings.
   users:
-    admin:
+    -
+      role: administrator
       username: admin
       password: admin
-    editor:
-      username: editor
-      password: editor
-    author:
-      username: author
-      password: author
-    contributor:
-      username: contributor
-      password: contributor
-    subscriber:
-      username: subscriber
-      password: subscriber
+    -
+      role: contributor,superhero
+      username: clark
+      password: kent
 
   # WordPress settings.
   site_url: ~
@@ -51,7 +44,7 @@ Option           | Default value | Description
 :----------------| :------------ | :----------
 `default_driver` | "wpcli"       | _Optional_.<br>The [WordPress driver](/features/overview.md) to use ("wpcli", "wpphp").
 `path`           | null          | _Optional_.<br>Path to WordPress files.
-`users.*`        | _see example_ | _Optional_.<br>Keys must match names of WordPress roles.
+`users.*`        | _see example_ | _Optional_.<br>`roles` property can accept multiple values, comma-seperated.
 `site_url`       | null          | _Optional_.<br>If your WordPress is installed in a subdirectory, set this to the `site_url()` value. Defaults to [`mink.base_url`](http://behat.org/en/latest/user_guide/configuration.html#extensions).
 `permalinks.*`   | _see example_ | _Optional_.<br>Permalink pattern for the specific kind of link.<br>`%s` is replaced with an ID/object name, as appropriate.
 `database.restore_after_test` | false | _Optional_.<br>If <code>true</code>, [WordHat will restore your site's database to its initial state between feature tests](/recipes/content.md).

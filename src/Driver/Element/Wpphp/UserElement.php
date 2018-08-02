@@ -21,11 +21,30 @@ class UserElement extends BaseElement
      */
     public function create($args)
     {
-        $args = wp_slash($args);
-        $user = wp_insert_user($args);
+        $extra_roles = [];
 
-        if (is_wp_error($user)) {
-            throw new UnexpectedValueException(sprintf('[W615] Failed creating new user: %s', $user->get_error_message()));
+        // Store multiple roles; WP can only assign one on user creation.
+        if (! empty($args['role'])) {
+            if (! is_array($args['role'])) {
+                $args['role'] = array_map('trim', explode(',', $args['role']));
+            }
+
+            $extra_roles  = $args['role'];
+            $args['role'] = array_shift($extra_roles);
+        }
+
+        $args    = wp_slash($args);
+        $user_id = wp_insert_user($args);
+
+        if (is_wp_error($user_id)) {
+            throw new UnexpectedValueException(sprintf('[W615] Failed creating new user: %s', $user_id->get_error_message()));
+        }
+
+        $wp_user = get_user_by('ID', $user_id);
+
+        // Assign any extra roles.
+        foreach ($extra_roles as $role) {
+            $wp_user->add_role($role);
         }
 
         return $this->get($user);

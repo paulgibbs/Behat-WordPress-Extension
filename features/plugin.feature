@@ -5,7 +5,7 @@ Feature: Managing plugins
   I want to test managing plugins
 
   Background:
-    Given I am logged in as an admin
+    Given I am logged in as an administrator
 
   Scenario: Activate a plugin
     When I activate the "hello" plugin

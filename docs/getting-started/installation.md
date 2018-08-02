@@ -27,6 +27,7 @@ cd project</code></pre>
 
 <li><p>Edit your <code>behat.yml</code> and: <ul style="list-style-type: lower-alpha"><li>Update the <code>base_url</code> setting with the URL of the website that you intend to test.</li>
 <li>Update the <code>path</code> setting with either the relative or absolute path to your WordPress' files.</li>
+<li>Update the <code>users</code> section, and specify a username and password of an administrator user account in your WordPress.</li>
 <li>If your WordPress is installed in a subdirectory, <a href="/recipes/faq/index.html#wordpress">consult the FAQ for information about the <code>site_url</code> setting</a>.</li></ul>
 </li>
 
