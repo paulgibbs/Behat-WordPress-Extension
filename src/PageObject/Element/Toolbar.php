@@ -120,7 +120,6 @@ class Toolbar extends Element
                 $id = $first_level_item->getAttribute('id');
                 $this->getSession()->executeScript(
                     '(function(){var el = document.getElementById("#' . $id . '"); if (el) { el.classList.add("hover"); }})()'
-
                 );
             } catch (UnsupportedDriverActionException $e) {
                 // This will fail for GoutteDriver but neither is it necessary.
