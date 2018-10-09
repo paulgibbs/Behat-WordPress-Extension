@@ -119,7 +119,7 @@ class Toolbar extends Element
                 // "Focus" (add hover class) on the toolbar link so the submenu appears.
                 $id = $first_level_item->getAttribute('id');
                 $this->getSession()->evaluateScript(
-                    'document.getElementById("#' . $id . '").classList.add("hover");'
+                    'var el = document.getElementById("#' . $id . '"); if (el) { el.classList.add("hover"); }'
                 );
             } catch (UnsupportedDriverActionException $e) {
                 // This will fail for GoutteDriver but neither is it necessary.
@@ -185,7 +185,7 @@ class Toolbar extends Element
          */
         try {
             $this->getSession()->evaluateScript(
-                'document.getElementById("#wp-admin-bar-my-account").classList.add("hover");'
+                'var el = document.getElementById("#wp-admin-bar-my-account"); if (el) { el.classList.add("hover"); }'
             );
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary.
