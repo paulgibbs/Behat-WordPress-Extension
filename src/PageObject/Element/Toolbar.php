@@ -118,8 +118,9 @@ class Toolbar extends Element
             try {
                 // "Focus" (add hover class) on the toolbar link so the submenu appears.
                 $id = $first_level_item->getAttribute('id');
-                $this->getSession()->evaluateScript(
-                    'const el = document.getElementById("#' . $id . '"); if (el) { el.classList.add("hover"); }'
+                $this->getSession()->executeScript(
+                    '(function(){var el = document.getElementById("#' . $id . '"); if (el) { el.classList.add("hover"); }})()'
+
                 );
             } catch (UnsupportedDriverActionException $e) {
                 // This will fail for GoutteDriver but neither is it necessary.
@@ -184,8 +185,8 @@ class Toolbar extends Element
          * See https://github.com/paulgibbs/behat-wordpress-extension/issues/65
          */
         try {
-            $this->getSession()->evaluateScript(
-                'const el = document.getElementById("#wp-admin-bar-my-account"); if (el) { el.classList.add("hover"); }'
+            $this->getSession()->executeScript(
+                '(function(){var el = document.getElementById("#wp-admin-bar-my-account"); if (el) { el.classList.add("hover"); }})()'
             );
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary.
