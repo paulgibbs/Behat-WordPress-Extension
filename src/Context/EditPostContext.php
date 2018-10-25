@@ -225,4 +225,58 @@ class EditPostContext extends RawWordpressContext
             $this->getSession()->getDriver()
         );
     }
+
+    /**
+     * Go to the edit post admin page for the latest post of a specific post status and post type.
+     *
+     * This step allows you to specify the post type to consider.
+     * This step allows you to specify the post status to consider.
+     *
+     * Example: Given I am editing the latest published post
+     * Example: Given I am editing the latest draft event
+     * Example: Given I am editing the latest scheduled post
+     *
+     * @Given /^I am editing the latest ([a-z_-]+) ([a-z_-]+)$/
+     *
+     * @param string $post_status The post status of the referenced 'post' being edited.
+     * @param string $post_type The post type of the referenced 'post' being edited.
+     */
+    public function iEditTheLatestPostOfPostTypeAndStatus(string $post_status='publish', string $post_type)
+    {
+
+        /**
+         * Removed "ed" from the end of $post_status if it is present.
+         * This allows words like "published" to be translated into the proper post status.
+         */
+        $post_status_ending = substr($post_status, -2);
+        if ( 'ed' == $post_status_ending ) {
+            $post_status = substr($post_status, 0, -2);
+        }
+
+        $args = array (
+            "--post_type=$post_type",
+            '--field=ID',
+            '--orderby=date',
+            '--order=DESC',
+            "--post_status=$post_status",
+            '--posts_per_page=1',
+            '--ignore_sticky_posts=1',
+        );
+        
+        $wpcli_output = $this->getDriver()->wpcli('post', 'list', $args);
+
+        // Throw an exception if the result from wp-cli is empty or is not number.
+        if( 
+            empty( $wpcli_output['stdout'] ) || 
+            1 !== preg_match( '/^[0-9]+$/', $wpcli_output['stdout'] ) 
+        ){
+            throw new \Exception("No posts with the post type '$post_type' and post status '$post_status' found");
+        }
+
+        $post_id = (int) $wpcli_output['stdout'];
+        
+        $this->edit_post_page->open(array(
+            'id' => $post_id,
+        ));
+    }
 }
