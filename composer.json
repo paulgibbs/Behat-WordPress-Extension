@@ -1,7 +1,7 @@
 {
   "name": "paulgibbs/behat-wordpress-extension",
   "type": "behat-extension",
-  "description": "WordHat is a Behat extension, integrating Behat, Mink, and WordPress. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.",
+  "description": "WordHat is a Behat extension for WordPress. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.",
   "keywords": [
     "WordPress",
     "behat",
