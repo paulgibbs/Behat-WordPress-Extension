@@ -1,6 +1,6 @@
 # WordHat: Behat for WordPress
 
-WordHat is an integration layer between [Behat](http://behat.org), [Mink](https://github.com/Behat/MinkExtension), and [WordPress](https://wordpress.org). It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.
+WordHat is a [Behat](http://behat.org) extension for [WordPress](https://wordpress.org). It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.
 
 [![Build Status on Travis-CI](https://travis-ci.com/paulgibbs/behat-wordpress-extension.svg?branch=master)](https://travis-ci.com/paulgibbs/behat-wordpress-extension)
 [![Latest Stable Version](https://poser.pugx.org/paulgibbs/behat-wordpress-extension/v/stable.svg)](https://packagist.org/packages/paulgibbs/behat-wordpress-extension)
