@@ -20,10 +20,7 @@
   "config": {
     "preferred-install": "dist",
     "sort-packages": true,
-    "autoloader-suffix": "wordhat",
-    "platform": {
-      "php": "7.1"
-    }
+    "autoloader-suffix": "wordhat"
   },
   "autoload": {
     "psr-4": {
@@ -35,7 +32,7 @@
   },
   "require": {
     "behat/behat": "~3.1",
-    "php": "~7.1",
+    "php": ">=7.1 <7.4",
     "sensiolabs/behat-page-object-extension": "~2.1",
     "behat/mink-extension": "~2.3",
 
