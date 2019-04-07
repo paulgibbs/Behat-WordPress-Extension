@@ -5,7 +5,6 @@ vendor/
 
 .DS_Store
 npm-debug.log
-wp-cli.yml
 /selenium.log
 
 /tests/app/www

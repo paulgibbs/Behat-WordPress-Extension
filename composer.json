@@ -69,7 +69,7 @@
     "ci-tests": [
       "@test:behat-ci"
     ],
-    "local-tests": [
+    "tests": [
       "@test:behat-local"
     ],
 
@@ -77,6 +77,8 @@
       "vendor/bin/behat --colors --format progress"
     ],
     "test:behat-local": [
+      "echo 'Make sure Selenium is running!'",
+      "BEHAT_PARAMS='{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://behat.local\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"site_url\":\"http://behat.local/wp\",\"wpcli\":{\"alias\":\"dev\"}}}}' vendor/bin/behat --colors"
     ]
   }
 }

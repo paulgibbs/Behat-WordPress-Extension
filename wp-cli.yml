@@ -1,0 +1,3 @@
+@dev:
+  ssh: vagrant@behat.local
+  path: /vagrant/wp
