@@ -35,8 +35,9 @@ matrix:
 env:
   global:
     - WP_WEBROOT="tests/app/www/"
-    - BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"path\":\"$WP_WEBROOT\"}}}"
     - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-progress --no-suggest --prefer-dist"
+  matrix:
+    - WP_VERSION="~5.1" BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"path\":\"$WP_WEBROOT\"}}}"
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -45,7 +46,7 @@ before_install:
 install:
   - travis_retry composer global require $DEFAULT_COMPOSER_FLAGS hirak/prestissimo
   - travis_retry composer install $DEFAULT_COMPOSER_FLAGS
-  - travis_retry composer require roots/wordpress ^5.1
+  - travis_retry composer require roots/wordpress $WP_VERSION
   - npm install selenium-standalone@latest -g
   - selenium-standalone install
 
