@@ -39,8 +39,8 @@ env:
     - WP_VERSION="~5.1"
     - WP_WEBROOT="tests/app/www/"
   matrix:
-    - BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\",\"path\":\"$WP_WEBROOT\"}}}"
-    - BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpphp\",\"path\":\"$WP_WEBROOT\"}}}"
+    - LABEL="wpcli" BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\",\"path\":\"$WP_WEBROOT\"}}}"
+    - LABEL="wpphp" BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpphp\",\"path\":\"$WP_WEBROOT\"}}}"
 
 before_install:
   - phpenv config-rm xdebug.ini
