@@ -78,7 +78,7 @@
     ],
     "test:behat-local": [
       "echo 'Make sure Selenium is running!'",
-      "BEHAT_PARAMS='{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://behat.local\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"site_url\":\"http://behat.local/wp\",\"wpcli\":{\"alias\":\"dev\"}}}}' vendor/bin/behat --colors"
+      "BEHAT_PARAMS='{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://behat.local\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\",\"site_url\":\"http://behat.local/wp\",\"wpcli\":{\"alias\":\"dev\"}}}}' vendor/bin/behat --colors"
     ]
   }
 }
