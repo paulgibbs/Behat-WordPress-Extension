@@ -1,5 +1,13 @@
+includes:
+  - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+  - vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
-  excludes_analyse:
-    # These reference global WP functions.
-    - %rootDir%/../../../src/Driver/Element/Wpphp/*
-    - src/Driver/WpphpDriver.php
+  level: 2
+  paths:
+    - %currentWorkingDirectory%/src/
+  autoload_files:
+    - %currentWorkingDirectory%/tests/phpstan/bootstrap.php
+#  excludes_analyse:
+  ignoreErrors:
+    # TODO https://github.com/paulgibbs/behat-wordpress-extension/issues/242
+    - '#undefined .+ PaulGibbs\\WordpressBehatExtension\\Driver\\DriverInterface::#'

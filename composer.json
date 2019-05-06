@@ -1,7 +1,7 @@
 {
   "name": "paulgibbs/behat-wordpress-extension",
   "type": "behat-extension",
-  "description": "WordHat is a Behat extension for WordPress. It provides WordPress-specific functionality for common testing scenarios specific to WordPress sites.",
+  "description": "WordHat is a Behat extension for WordPress.",
   "keywords": [
     "WordPress",
     "behat",
@@ -35,14 +35,14 @@
     "php": ">=7.1 <7.4",
     "sensiolabs/behat-page-object-extension": "~2.1",
     "behat/mink-extension": "~2.3",
-
     "ocramius/proxy-manager": "2.1"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2",
     "behat/mink-selenium2-driver": "^1.3",
     "genesis/behat-fail-aid": "^2.0",
-    "phpstan/phpstan": "~0.9",
+    "phpstan/phpstan": "^0.11.5",
+    "szepeviktor/phpstan-wordpress": "^0.1.0",
     "squizlabs/php_codesniffer": "~3.0",
     "wp-cli/wp-cli": "~1.5"
   },
@@ -55,9 +55,9 @@
     "wordpress-install-dir": "tests/app/www"
   },
   "scripts": {
-    "phpcs": "vendor/bin/phpcs --standard=phpcs-ruleset.xml -p -s -v -n src --extensions=php",
-    "phpcbf": "vendor/bin/phpcbf --standard=phpcs-ruleset.xml -n src",
-    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --level=1 src",
+    "phpcs": "vendor/bin/phpcs -p -s -v -n --extensions=php src/",
+    "phpcbf": "vendor/bin/phpcbf -n src/",
+    "phpstan": "vendor/bin/phpstan analyse",
     "commit": [
       "@phpcs",
       "@phpstan"
