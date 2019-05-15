@@ -63,8 +63,7 @@ trait UserAwareContextTrait
 
         $this->login_page->setUserName($username);
         $this->login_page->setUserPassword($password);
-
-        // Submit the login form.
+        $this->login_page->setRememberMe();
         $this->login_page->submitLoginForm();
 
         if (! $this->loggedIn()) {
