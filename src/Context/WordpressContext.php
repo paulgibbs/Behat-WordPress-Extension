@@ -4,6 +4,7 @@ namespace PaulGibbs\WordpressBehatExtension\Context;
 
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Behat\Event;
 use Behat\Mink\Driver\Selenium2Driver;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\CacheAwareContextTrait;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\DatabaseAwareContextTrait;
@@ -124,4 +125,25 @@ class WordpressContext extends RawWordpressContext
 
         $this->importDatabase(['path' => $file]);
     }
+
+    /**
+     * If database.restore_after_test is set, and scenario is tagged "db", restore the database from a backup.
+     *
+     * The database will be restored from a backup made via maybeBackupDatabase().
+     *
+     * @AfterScenario @db
+     *
+     * @param Event\SuiteEvent $scope
+     */
+    public function maybeRemoveDatabaseDump(Event\SuiteEvent $event)
+    {
+        $file = $this->getWordpress()->getSetting('database_backup_file');
+        if (! $file) {
+            return;
+        }
+
+        // TODO: how to delete $file? Could be remote.
+        //$this->importDatabase(['path' => $file]);
+    }
+}
 }
