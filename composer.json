@@ -34,7 +34,9 @@
     "behat/behat": "~3.1",
     "php": ">=7.1 <7.4",
     "sensiolabs/behat-page-object-extension": "~2.1",
-    "behat/mink-extension": "~2.3"
+    "behat/mink-extension": "~2.3",
+
+    "ocramius/proxy-manager": "~2.1.0"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2",
