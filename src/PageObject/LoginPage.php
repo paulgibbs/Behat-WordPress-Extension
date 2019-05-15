@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
+
 namespace PaulGibbs\WordpressBehatExtension\PageObject;
 
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
-use Behat\Mink\Exception\ExpectationException;
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 
 /**
- * Page object representing a the WordPress login page.
+ * Page object representing the WordPress login page.
  *
- * This class houses methods for interacting with the login page and login form
+ * This class houses methods for interacting with the login page and login form.
  */
 class LoginPage extends Page
 {
-
     /**
      * @var string $path
      */
@@ -28,16 +28,12 @@ class LoginPage extends Page
      */
     protected function verifyLoginPage()
     {
-
-        // Get the session.
         $session = $this->verifySession();
+        $page    = $session->getPage();
+        $url     = $session->getCurrentUrl();
 
-        // Get the url.
-        $url = $session->getCurrentUrl();
-
-        // If the login path isn't in the current URL.
         if (false === strrpos($url, $this->path)) {
-            // We aren't on the login screen.
+            // If the login path isn't in the current URL, we aren't on the login screen.
             throw new ExpectationException(
                 sprintf(
                     'Expected screen is the wp-login form, instead on "%1$s".',
@@ -47,22 +43,14 @@ class LoginPage extends Page
             );
         }
 
-        // Get the page.
-        $page = $session->getPage();
+        $selector   = '#loginform';
+        $login_form = $page->find('css', $selector);
 
-        // Login form CSS selector
-        $login_form_selector = '#loginform';
-
-        // Search for the login form exists.
-        $login_form = $page->find('css', $login_form_selector);
-
-        // If the login form was not found.
         if (null === $login_form) {
-            // We aren't on the login screen.
             throw new ExpectationException(
                 sprintf(
                     'Expected to find the login form with the selector "%1$s" at the current URL "%2$s".',
-                    $login_form_selector,
+                    $selector,
                     $url
                 ),
                 $this->getDriver()
@@ -75,24 +63,17 @@ class LoginPage extends Page
      *
      * @param string $username the username to fill into the login form
      *
-     * @throws \Behat\Mink\Exception\ExpectationException
+     * @throws ExpectationException
      */
     public function setUserName(string $username)
     {
-
-        // Get the session.
         $session = $this->verifySession();
+        $page    = $session->getPage();
 
-        // Verify we are on the login page.
         $this->verifyLoginPage();
 
-        // Get the page.
-        $page = $session->getPage();
-
-        // Find the user_login field.
         $user_login_field = $page->find('css', '#user_login');
 
-        // Try to focus the user_login field.
         try {
             $user_login_field->focus();
         } catch (UnsupportedDriverActionException $e) {
@@ -100,11 +81,10 @@ class LoginPage extends Page
         }
 
         // Set the value of $username in the user_login field.
-        $user_login_field->setValue($username);
         // The field can be stubborn, so we use fillField also.
+        $user_login_field->setValue($username);
         $page->fillField('user_login', $username);
 
-        // Attempt to fill the user_login field with JavaScript.
         try {
             $session->executeScript(
                 "document.getElementById('user_login').value='$username'"
@@ -113,10 +93,8 @@ class LoginPage extends Page
             // This will fail for drivers without JavaScript support
         }
 
-        // Get the actual value of the user_login field.
         $username_actual = $user_login_field->getValue();
 
-        // Verify the username was filled in correctly.
         if ($username_actual !== $username) {
             throw new ExpectationException(
                 sprintf(
@@ -134,24 +112,17 @@ class LoginPage extends Page
      *
      * @param string $password the password to fill into the login form
      *
-     * @throws \Behat\Mink\Exception\ExpectationException
+     * @throws ExpectationException
      */
     public function setUserPassword(string $password)
     {
-
-        // Get the session.
         $session = $this->verifySession();
+        $page    = $session->getPage();
 
-        // Verify we are on the login page.
         $this->verifyLoginPage();
 
-        // Get the page.
-        $page = $session->getPage();
-
-        // Find the user_pass field.
         $user_pass_field = $page->find('css', '#user_pass');
 
-        // Try to focus the user_pass field.
         try {
             $user_pass_field->focus();
         } catch (UnsupportedDriverActionException $e) {
@@ -159,11 +130,10 @@ class LoginPage extends Page
         }
 
         // Set the value of $password in the user_pass field.
-        $user_pass_field->setValue($password);
         // The field can be stubborn, so we use fillField also.
+        $user_pass_field->setValue($password);
         $page->fillField('user_pass', $password);
 
-        // Attempt to fill the user_pass field with JavaScript.
         try {
             $session->executeScript(
                 "document.getElementById('user_pass').value='$password'"
@@ -172,10 +142,8 @@ class LoginPage extends Page
             // This will fail for drivers without JavaScript support
         }
 
-        // Get the actual value of the user_pass field.
         $password_actual = $user_pass_field->getValue();
 
-        // Verify the password was filled in correctly.
         if ($password_actual !== $password) {
             throw new ExpectationException(
                 sprintf(
@@ -193,27 +161,19 @@ class LoginPage extends Page
      */
     public function submitLoginForm()
     {
-
-        // Get the session.
         $session = $this->verifySession();
+        $page    = $session->getPage();
 
-        // Verify we are on the login page.
         $this->verifyLoginPage();
 
-        // Get the page.
-        $page = $session->getPage();
-
-        // Find the submit button.
         $submit_button = $page->find('css', '#wp-submit');
 
-        // Try to focus the submit button.
         try {
             $submit_button->focus();
         } catch (UnsupportedDriverActionException $e) {
             // This will fail for GoutteDriver but neither is it necessary.
         }
 
-        // Click the submit button.
         $submit_button->click();
     }
 
@@ -224,21 +184,17 @@ class LoginPage extends Page
      */
     protected function verifySession()
     {
-        // Get the session.
         $session = $this->getSession();
 
-        // Start the session if needed.
         if (! $session->isStarted()) {
             $session->start();
         }
 
-        // If we aren't on a valid page
+        // Check we are on some web page.
         if ('about:blank' === $session->getCurrentUrl()) {
-            // Go to the home page
             $session->visit('/');
         }
 
-        // Return the session.
         return $session;
     }
 }
