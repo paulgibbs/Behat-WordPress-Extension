@@ -5,7 +5,7 @@ description: How to get install Behat, WordPress, and WordHat
 
 WordHat requires [PHP](https://php.net/) (version 7.1+), [Composer](https://getcomposer.org/), and a [WordPress](https://wordpress.org/) site to test (version 4.8+).
 
-We strongly recommend using [WP-CLI](https://wp-cli.org/)[^1] \(version 1.3.0+), and [Selenium](http://www.seleniumhq.org/)[^2] to help with browser automation. Selenium is fiddly to set up, so we recommend using [vvo/selenium-standalone](https://github.com/vvo/selenium-standalone#command-line-interface), which requires the [Java Platform JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+We strongly recommend using [WP-CLI](https://wp-cli.org/)[^1] \(version 2.1.0+), and [Selenium](http://www.seleniumhq.org/)[^2] to help with browser automation. Selenium is fiddly to set up, so we recommend using [vvo/selenium-standalone](https://github.com/vvo/selenium-standalone#command-line-interface), which requires the [Java Platform JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
 
 ## Installation
