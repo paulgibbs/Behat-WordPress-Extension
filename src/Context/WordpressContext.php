@@ -94,16 +94,6 @@ class WordpressContext extends RawWordpressContext
     }
 
     /**
-     * Clear Mink's browser environment.
-     *
-     * @AfterScenario
-     */
-    public function resetBrowser()
-    {
-        parent::resetBrowser();
-    }
-
-    /**
      * If database.restore_after_test is set, and scenario is tagged "db", restore the database from a backup.
      *
      * The database will be restored from a backup made via maybeBackupDatabase().
