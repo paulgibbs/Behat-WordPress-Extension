@@ -135,7 +135,7 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
      */
     public function resetBrowser()
     {
-        $this->getSession()->reset();
+        $this->getSession()->stop();
     }
 
     /**
