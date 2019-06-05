@@ -3,6 +3,21 @@ description: WordHat project news and changelog
 
 WordHat does not yet support WordPress' new content editor (Gutenberg). The step definitions for creating content assume, and only work with, the classic WordPress editor.
 
+## [3.2.0] - 2019-06-05
+### Added
+- CI: Run build checks on Travis-CI.
+
+### Changed
+- Composer: update dependencies to latest constrained versions (#244).
+- Composer, Dev Packages: switch `wp-cli` package to `wp-cli-bundle`.
+- Mink: restart browser between scenarios instead of resetting (#245).
+- Contexts, User: tick "remember me" when a user logs-in to WordPress (#245).
+
+### Fixed
+- Update WordHat's internal tests for compatibility with recent versions of WordPress!
+- Contexts, User: attempts made to improve intermittent failures with the log-in action (#47, #245).
+- Drivers, WP-CLI: allow use of `page_template` when creating content (#239).
+
 ## [3.1.2] - 2019-04-02
 ### Fixed
 - Contexts, User: fix errors and exceptions caused by trying to log-out before a browser is open.
@@ -215,6 +230,7 @@ WordHat does not yet support WordPress' new content editor (Gutenberg). The step
 ### Added
 - First working version of basic architecture.
 
+[3.2.0]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.1.2...v3.2.0
 [3.1.2]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.1.1...v3.1.2
 [3.1.1]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.0.0...v3.1.0
