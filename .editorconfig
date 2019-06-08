@@ -10,7 +10,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
 
-[{.jshintrc,*.json,*.yml,*.xml,*.sh,*.conf,*.neon}]
+[{.jshintrc,*.json,*.yml,*.xml,*.sh,*.conf,*.neon,*.xliff}]
 indent_style = space
 indent_size = 2
 

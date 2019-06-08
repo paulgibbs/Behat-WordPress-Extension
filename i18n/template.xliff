@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="global" target-language="replace-me">
+    <body>
+      <trans-unit id="given-i-am-on-the-homepage-">
+        <source><![CDATA[Given /^(?:|I )am on (?:|the )homepage$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-go-to-the-homepage-">
+        <source><![CDATA[When /^(?:|I )go to (?:|the )homepage$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-on-p-page-">
+        <source><![CDATA[Given /^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-go-to-p-page-">
+        <source><![CDATA[When /^(?:|I )go to "(?P<page>[^"]+)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-reload-the-page-">
+        <source><![CDATA[When /^(?:|I )reload the page$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-move-backward-one-page-">
+        <source><![CDATA[When /^(?:|I )move backward one page$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-move-forward-one-page-">
+        <source><![CDATA[When /^(?:|I )move forward one page$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-pres-p-buton-">
+        <source><![CDATA[When /^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-folow-p-link-">
+        <source><![CDATA[When /^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-fil-in-p-field-with-p-value-">
+        <source><![CDATA[When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-fil-in-p-field-with-">
+        <source><![CDATA[When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-fil-in-p-value-for-p-field-">
+        <source><![CDATA[When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-fil-in-the-folowing-">
+        <source><![CDATA[When /^(?:|I )fill in the following:$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-select-p-option-from-p-select-">
+        <source><![CDATA[When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-aditionaly-select-p-option-from-p-select-">
+        <source><![CDATA[When /^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-check-p-option-">
+        <source><![CDATA[When /^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-uncheck-p-option-">
+        <source><![CDATA[When /^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-atach-the-file-p-path-to-p-field-">
+        <source><![CDATA[When /^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-be-on-p-page-">
+        <source><![CDATA[Then /^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-be-on-the-homepage-">
+        <source><![CDATA[Then /^(?:|I )should be on (?:|the )homepage$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-i-url-i-should-match-p-patern-">
+        <source><![CDATA[Then /^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-response-status-code-should-be-p-code-d-">
+        <source><![CDATA[Then /^the response status code should be (?P<code>\d+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-response-status-code-should-not-be-p-code-d-">
+        <source><![CDATA[Then /^the response status code should not be (?P<code>\d+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-p-text-">
+        <source><![CDATA[Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-not-se-p-text-">
+        <source><![CDATA[Then /^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-text-matching-p-patern-">
+        <source><![CDATA[Then /^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-not-se-text-matching-p-patern-">
+        <source><![CDATA[Then /^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-response-should-contain-p-text-">
+        <source><![CDATA[Then /^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-response-should-not-contain-p-text-">
+        <source><![CDATA[Then /^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-p-text-in-the-p-element-element-">
+        <source><![CDATA[Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-not-se-p-text-in-the-p-element-element-">
+        <source><![CDATA[Then /^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-element-element-should-contain-p-value-">
+        <source><![CDATA[Then /^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-element-element-should-not-contain-p-value-">
+        <source><![CDATA[Then /^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-an-p-element-element-">
+        <source><![CDATA[Then /^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-not-se-an-p-element-element-">
+        <source><![CDATA[Then /^(?:|I )should not see an? "(?P<element>[^"]*)" element$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-field-field-should-contain-p-value-">
+        <source><![CDATA[Then /^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-field-field-should-not-contain-p-value-">
+        <source><![CDATA[Then /^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-p-num-d-p-element-elements-">
+        <source><![CDATA[Then /^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-checkbox-checkbox-should-be-checked-">
+        <source><![CDATA[Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-checkbox-checkbox-is-checked-">
+        <source><![CDATA[Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is checked$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-checkbox-p-checkbox-is-should-be-checked-">
+        <source><![CDATA[Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-checkbox-checkbox-should-be-unchecked-not-be-checked-">
+        <source><![CDATA[Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should (?:be unchecked|not be checked)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-p-checkbox-checkbox-is-unchecked-not-checked-">
+        <source><![CDATA[Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is (?:unchecked|not checked)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-checkbox-p-checkbox-should-be-unchecked-not-be-checked-">
+        <source><![CDATA[Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-checkbox-p-checkbox-is-unchecked-not-checked-">
+        <source><![CDATA[Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-print-curent-url-">
+        <source><![CDATA[Then /^print current URL$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-print-last-response-">
+        <source><![CDATA[Then /^print last response$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-show-last-response-">
+        <source><![CDATA[Then /^show last response$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-there-are-there-is-a-posts-">
+        <source><![CDATA[Given /^(?:there are|there is a) posts?:/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-they-are-viewing-a-the-blog-post-">
+        <source><![CDATA[Given /^(?:I am|they are) viewing (?:a|the)(?: blog)? post(?: "([^"]+)"|:)/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-delete-the-post-post-title">
+        <source><![CDATA[Given I delete the post :post_title]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-not-be-able-to-view-the-post-post-title">
+        <source><![CDATA[Then I should not be able to view the post :post_title]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-they-are-on-the-dashboard-">
+        <source><![CDATA[Given /^(?:I am|they are) on the dashboard/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-they-are-in-wp-admin-">
+        <source><![CDATA[Given /^(?:I am|they are) in wp-admin/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-they-go-to-the-dashboard-">
+        <source><![CDATA[When /^(?:I|they) go to the dashboard/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-they-go-to-wp-admin-">
+        <source><![CDATA[When /^(?:I|they) go to wp-admin/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-click-on-the-link-link-in-the-header">
+        <source><![CDATA[When I click on the :link link in the header]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-be-on-the-admin-scren-scren">
+        <source><![CDATA[Then I should be on the :admin_screen screen]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-go-to-the-menu-item">
+        <source><![CDATA[Given I go to the menu :item]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-go-to-the-item-menu">
+        <source><![CDATA[Given I go to the :item menu]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-they-should-se-an-eror-status-mesage-that-says-">
+        <source><![CDATA[Then /^(?:I|they) should see an? (error|status) message that says "([^"]+)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-the-cache-is-cleared">
+        <source><![CDATA[When the cache is cleared]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-the-cache-has-ben-cleared">
+        <source><![CDATA[Given the cache has been cleared]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-the-name-plugin-is-active">
+        <source><![CDATA[Given the :name plugin is active]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-activate-the-name-plugin">
+        <source><![CDATA[When I activate the :name plugin]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-deactivate-the-name-plugin">
+        <source><![CDATA[When I deactivate the :name plugin]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-switch-the-theme-to-name">
+        <source><![CDATA[When I switch the theme to :name]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-there-are-there-is-a-users-">
+        <source><![CDATA[Given /^(?:there are|there is a) users?:/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-delete-the-user-login-user-acount">
+        <source><![CDATA[When I delete the :user_login user account]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-am-they-are-viewing-posts-published-by-">
+        <source><![CDATA[When /^(?:I am|they are) viewing posts published by (.+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-they-are-an-anonymous-user-">
+        <source><![CDATA[Given /^(?:I am|they are) an anonymous user/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-log-out">
+        <source><![CDATA[When I log out]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-they-are-loged-in-as-an-">
+        <source><![CDATA[Given /^(?:I am|they are) logged in as an? (.+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-they-are-loged-in-as-an-">
+        <source><![CDATA[Given /^(?:I am|they are) logged in as (?!an? )(.+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-they-should-not-be-able-to-log-in-as-an-">
+        <source><![CDATA[Then /^(?:I|they) should not be able to log in as an? (.+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-they-should-not-be-able-to-log-in-as-">
+        <source><![CDATA[Then /^(?:I|they) should not be able to log in as (.+)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-on-the-edit-a-za-z-scren-for-">
+        <source><![CDATA[Given /^I am on the edit ([a-zA-z_-]+) screen for "([^"]*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-am-on-the-edit-scren-for-p-title-">
+        <source><![CDATA[Given /^I am on the edit screen for "(?P<title>[^"]*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-change-the-title-to-p-title-">
+        <source><![CDATA[When /^I change the title to "(?P<title>[^"]*)"$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-switch-to-the-post-content-editor-s-visual-text-mode-i">
+        <source><![CDATA[When /^I switch to the post content editor's (visual|text) mode$/i]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-enter-the-folowing-content-into-the-post-content-editor-">
+        <source><![CDATA[When I enter the following content into the post content editor:]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-post-content-editor-is-in-visual-text-mode-i">
+        <source><![CDATA[Then /^the post content editor is in (visual|text) mode$/i]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-publish-the-post-changes-">
+        <source><![CDATA[When /^I publish the (post|changes?)$/]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-be-on-the-edit-post-type-scren-for-post-title">
+        <source><![CDATA[Then I should be on the edit :post_type screen for :post_title]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-the-title-metabox">
+        <source><![CDATA[Then I should see the :title metabox]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-not-se-the-title-metabox">
+        <source><![CDATA[Then I should not see the :title metabox]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-have-the-widget-name-widget-in-sidebar-name">
+        <source><![CDATA[Given I have the :widget_name widget in :sidebar_name]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-search-for-search-in-the-tolbar">
+        <source><![CDATA[When I search for :search in the toolbar]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-should-se-text-in-the-tolbar">
+        <source><![CDATA[Then I should see :text in the toolbar]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-the-tolbar-should-show-i-am-authenticated-as-username">
+        <source><![CDATA[Then the toolbar should show I am authenticated as :username]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="when-i-folow-the-tolbar-link-link">
+        <source><![CDATA[When I follow the toolbar link :link]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="then-i-ad-a-breakpoint">
+        <source><![CDATA[Then I add a breakpoint]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-take-a-screnshot">
+        <source><![CDATA[Given I take a screenshot]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+      <trans-unit id="given-i-gather-facts-for-the-curent-state">
+        <source><![CDATA[Given I gather facts for the current state]]></source>
+        <target><![CDATA[]]></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
