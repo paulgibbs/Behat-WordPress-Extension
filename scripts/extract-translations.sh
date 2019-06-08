@@ -1,8 +1,4 @@
 #!/bin/bash
-#set -euo pipefail
-#IFS=$'\n\t'
-
-# Paths relative to root.
 
 IFS=$'\n' BEHAT_STEPS=($(vendor/bin/behat --definitions l --no-colors))
 XLIFF_OUTPUT=template.xliff
