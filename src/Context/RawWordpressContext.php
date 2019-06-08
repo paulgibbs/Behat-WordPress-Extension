@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace PaulGibbs\WordpressBehatExtension\Context;
 
+use Behat\Behat\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use PaulGibbs\WordpressBehatExtension\WordpressDriverManager;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\PageObjectAwareContextTrait;
@@ -13,7 +14,7 @@ use SensioLabs\Behat\PageObjectExtension\Context\PageObjectAware;
  *
  * Does not contain any step defintions.
  */
-class RawWordpressContext extends RawMinkContext implements WordpressAwareInterface, PageObjectAware
+class RawWordpressContext extends RawMinkContext implements WordpressAwareInterface, PageObjectAware, Context\TranslatableContext
 {
     use PageObjectAwareContextTrait;
 
@@ -157,5 +158,15 @@ class RawWordpressContext extends RawMinkContext implements WordpressAwareInterf
         }
 
         return $random;
+    }
+
+    /**
+     * Return translation resource paths.
+     *
+     * @return string[] Path to translations.
+     */
+    public static function getTranslationResources()
+    {
+        return glob(__DIR__ . '/../../i18n/*.xliff');
     }
 }
