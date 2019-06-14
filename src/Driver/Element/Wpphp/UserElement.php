@@ -47,7 +47,7 @@ class UserElement extends BaseElement
             $wp_user->add_role($role);
         }
 
-        return $this->get($user);
+        return $this->get($user_id);
     }
 
     /**
