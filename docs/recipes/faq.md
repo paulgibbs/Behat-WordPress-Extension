@@ -22,4 +22,4 @@ If you are new to the project or Behat, we recommend that you first [read throug
 * If you are using a Vagrant-powered virtual machine to run Behat via the [WP-CLI driver](../features/overview.html#wp-cli), you will need to `vagrant ssh` into the box once. This will set up password-less authentication; otherwise, WordHat will prompt you for the SSH password frequently.
 
 ## WordPress
-* If your WordPress is installed in a subdirectory, you need to set the `site_url` option to the value of the "WordPress address (URL)" option (found in WordPress > Settings > General). For more information, [consult the WordHat documentation](/configuration/settings.md).
+* If your WordPress is installed in a subdirectory, you need to set the `site_url` option to the value of the "WordPress address (URL)" option (found in WordPress > Settings > General). For more information, [consult the WordHat documentation](/configuration/settings.html).
