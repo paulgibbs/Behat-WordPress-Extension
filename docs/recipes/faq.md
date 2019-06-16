@@ -4,7 +4,7 @@ description: WordHat frequently asked questions and answers
 If you are new to the project or Behat, we recommend that you first [read through our documentation](https://wordhat.info/). For any questions, feedback, or to contribute, you can get in contact with us via Github or our [Slack](https://wordhat.herokuapp.com).
 
 ## Browsers
-* If you are using [Selenium](http://docs.seleniumhq.org/download/) to run Javascript tests, and you access your WordPress site over HTTPS, *and* it has a self-signed certificate, you will need to manually configure the web browser to accept that certificate.
+* If you are using [Selenium](http://docs.seleniumhq.org/download/) to run Javascript tests, and you access your WordPress site over HTTPS, *and* your site has a self-signed certificate, you will need to manually configure the web browser to accept that certificate.
 
 ## Drivers
 * If you are using the WP-CLI driver to [connect to a remote WordPress site over SSH](https://make.wordpress.org/cli/handbook/running-commands-remotely/), WordHat assumes the remote server is Linux-like, with a shell that provides [GNU Coreutils](https://www.gnu.org/software/coreutils/coreutils.html).
@@ -16,7 +16,7 @@ If you are new to the project or Behat, we recommend that you first [read throug
 * With Selenium, some environments may require a "webdriver"; error messages may refer to "GeckoWebDriver" or "ChromeWebDriver", etc. Good solutions include [vvo/selenium-standalone](https://github.com/vvo/selenium-standalone#command-line-interface) or [joomla-projects/selenium-server-standalone](https://github.com/joomla-projects/selenium-server-standalone).
 
 ## Supported platforms
-* WordHat supports MacOS, most flavours of Linux, and Windows. We use [Travis-CI](https://travis-ci.org/paulgibbs/behat-wordpress-extension) and [Appveyor](https://ci.appveyor.com/project/PaulGibbs/behat-wordpress-extension) to test on Ubuntu and Windows, respectively, and require modern versions of PHP.
+* WordHat supports MacOS, most flavours of Linux, and Windows. We use [Travis-CI](https://travis-ci.org/paulgibbs/behat-wordpress-extension) to test on Ubuntu, and require modern versions of PHP.
 
 ## Virtual machines (Vagrant)
 * If you are using a Vagrant-powered virtual machine to run Behat via the [WP-CLI driver](../features/overview.html#wp-cli), you will need to `vagrant ssh` into the box once. This will set up password-less authentication; otherwise, WordHat will prompt you for the SSH password frequently.
