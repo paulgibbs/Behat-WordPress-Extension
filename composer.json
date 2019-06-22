@@ -72,7 +72,7 @@
     ],
 
     "test:behat-ci": [
-      "vendor/bin/behat --colors --format progress"
+      "vendor/bin/behat --config tests/app/behat-ci.yml --colors --format progress"
     ],
     "test:behat-local": [
       "echo 'Make sure Selenium is running!'",
