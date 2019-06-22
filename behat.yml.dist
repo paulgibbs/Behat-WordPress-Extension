@@ -14,18 +14,22 @@ default:
         - PaulGibbs\WordpressBehatExtension\Context\ToolbarContext
 
   extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
     Behat\MinkExtension:
       base_url: http://your-wordpress-site.example.com
       browser_name: chrome
-      default_session: default
-      javascript_session: selenium2
+      default_session: headless
+      javascript_session: javascript
       sessions:
-        default:
+        headless:
           goutte:
             guzzle_parameters:
-              verify: false  # Allow self-signed SSL certificates
-        selenium2:
-          selenium2: ~
+              verify: false
+        javascript:
+          chrome:
+            api_url: http://localhost:9222
+            validate_certificate: false
 
     PaulGibbs\WordpressBehatExtension:
       default_driver: wpcli
@@ -35,6 +39,6 @@ default:
           roles:
             - administrator
           username: admin
-          password: admin
+          password: password
       database:
         restore_after_test: true

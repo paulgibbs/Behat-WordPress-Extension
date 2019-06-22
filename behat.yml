@@ -15,7 +15,10 @@ default:
         - FailAid\Context\FailureContext
 
   extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
     Behat\MinkExtension:
+      base_url: http://behat.local
       browser_name: chrome
       default_session: headless
       javascript_session: javascript
@@ -23,10 +26,11 @@ default:
         headless:
           goutte:
             guzzle_parameters:
-              verify: false  # Allow self-signed SSL certificates
+              verify: false
         javascript:
-          selenium2:
-            wd_host: "http://127.0.0.1:4444/wd/hub"
+          chrome:
+            api_url: http://localhost:9222
+            validate_certificate: false
 
     PaulGibbs\WordpressBehatExtension:
       users:
@@ -38,7 +42,9 @@ default:
       database:
         restore_after_test: true
       wpcli:
-        binary: ./vendor/bin/wp
+        binary: vendor/bin/wp
+        alias: dev
+      site_url: http://behat.local/wp/
 
     FailAid\Extension:
       screenshotDirectory: '%paths.base%/tests/artifacts'

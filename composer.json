@@ -40,7 +40,7 @@
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2",
-    "behat/mink-selenium2-driver": "^1.3",
+    "dmore/behat-chrome-extension": "^1.3",
     "genesis/behat-fail-aid": "^2.0",
     "phpstan/phpstan": "~0.9",
     "squizlabs/php_codesniffer": "~3.0",
@@ -48,7 +48,8 @@
   },
   "suggest": {
     "behat/mink-goutte-driver": "Headless Mink driver",
-    "behat/mink-selenium2-driver": "JS-enabled Mink driver (requires Selenium2)",
+    "behat/mink-selenium2-driver": "JS-enabled Mink driver (requires Selenium)",
+    "dmore/behat-chrome-extension": "JS-enabled Mink driver for Chrome (does not require Selenium)",
     "genesis/behat-fail-aid": "Get more out of your test suite by getting it to work with you when tests fail."
   },
   "extra": {
