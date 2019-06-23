@@ -27,7 +27,7 @@ about: Is something not working as you expected?
 > Include as many relevant details about the environment you experienced the bug in:
 
 * WordHat version used:
-* Environment name and version (e.g. PHP 7.1 on nginx 1.11.9):
+* Environment name and version (e.g. PHP 7.2 on nginx 1.11.9):
 * Server operating system type and version:
 * Type of Behat browser used (e.g. Selenium, headless Chrome, etc):
 * Link to your project:

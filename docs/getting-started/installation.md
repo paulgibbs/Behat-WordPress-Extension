@@ -3,7 +3,7 @@ description: How to get install Behat, WordPress, and WordHat
 
 ## Requirements
 
-WordHat requires [PHP](https://php.net/) (version 7.1+), [Composer](https://getcomposer.org/), and a [WordPress](https://wordpress.org/) site to test (version 4.8+).
+WordHat requires [PHP](https://php.net/) (version 7.2+), [Composer](https://getcomposer.org/), and a [WordPress](https://wordpress.org/) site to test (version 4.8+).
 
 We recommend using [WP-CLI](https://wp-cli.org/)[^1] \(version 2.1.0+).
 
