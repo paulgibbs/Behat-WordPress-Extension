@@ -1,6 +1,8 @@
 default:
   suites:
     default:
+      paths:
+        - '%paths.base%/../../features'
       contexts:
         - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
         - Behat\MinkExtension\Context\MinkContext
