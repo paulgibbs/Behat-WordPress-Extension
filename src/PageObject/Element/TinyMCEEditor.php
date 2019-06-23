@@ -57,11 +57,9 @@ class TinyMCEEditor extends Element
     public function setContent(string $content)
     {
         if (self::VISUAL === $this->getMode()) {
-            $this->getDriver()->switchToIFrame(self::$wysiwyg_iframe_id);
             $this->getDriver()->executeScript(
-                ';document.body.innerHTML = \'<p>' . addslashes(htmlspecialchars($content)) . '</p>\';'
+                ';document.getElementById(\'' . self::$wysiwyg_iframe_id . '\').contentDocument.body.innerHTML = \'<p>' . addslashes(htmlspecialchars($content)) . '</p>\';'
             );
-            $this->getDriver()->switchToIFrame();
         } else {
             $this->fillField(self::$textarea_id, $content);
         }
