@@ -5,7 +5,7 @@ description: How to get install Behat, WordPress, and WordHat
 
 WordHat requires [PHP](https://php.net/) (version 7.1+), [Composer](https://getcomposer.org/), and a [WordPress](https://wordpress.org/) site to test (version 4.8+).
 
-We strongly recommend using [WP-CLI](https://wp-cli.org/)[^1] \(version 2.1.0+), and [Selenium](http://www.seleniumhq.org/)[^2] to help with browser automation. Selenium is fiddly to set up, so we recommend using [vvo/selenium-standalone](https://github.com/vvo/selenium-standalone#command-line-interface), which requires the [Java Platform JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+We recommend using [WP-CLI](https://wp-cli.org/)[^1] \(version 2.1.0+).
 
 
 ## Installation
@@ -18,7 +18,7 @@ cd project</code></pre>
 </li>
 
 <li>Tell <a href="https://getcomposer.org/">Composer</a> to download WordHat:
-    <pre><code>composer require --dev paulgibbs/behat-wordpress-extension behat/mink-goutte-driver behat/mink-selenium2-driver</code></pre>
+    <pre><code>composer require --dev paulgibbs/behat-wordpress-extension behat/mink-goutte-driver dmore/behat-chrome-extension</code></pre>
 </li>
 
 <li>Copy WordHat's sample configuration file into your <code>project</code> folder and rename it:
@@ -41,7 +41,7 @@ cd project</code></pre>
 </li>
 
 <li>To confirm that everything is set up correctly, run:
-    <pre><code>vendor/bin/behat -dl</code></pre>
+    <pre><code>vendor/bin/behat --definitions i</code></pre>
     If it worked, you will see a list of text that looks a little like the following (but much longer):
     <pre><code>Given I am an anonymous user
 Given I am not logged in
@@ -60,6 +60,3 @@ Now that you have WordHat set up, we recommend reading our [introduction to Beha
 
 [^1]:
     The WP-CLI executable *must* be named `wp` and be within your system's <a href="https://en.wikipedia.org/wiki/PATH_(variable)" id="WP-CLI">$PATH</a>.
-
-[^2]:
-    Selenium is recommended for testing <a href="http://mink.behat.org/en/latest/guides/drivers.html" id="SEL">websites that require Javascript</a>. Behat requires the [Mink Selenium2 library](https://packagist.org/packages/behat/mink-selenium2-driver), which we include in the installation instructions above.

@@ -5,7 +5,7 @@ WordHat provides WordPress-specific functionality for common testing scenarios t
 
 For convenience, our `behat.yml.dist` configuration template loads all of our contexts by default, though Behat does support [more complex configuration](http://behat.org/en/latest/user_guide/configuration/suites.html) for advanced use cases.
 
-To find out which step definitions are available for your tests, run `vendor/bin/behat -dl` in your terminal.
+To find out which step definitions are available for your tests, run `vendor/bin/behat --definitions i` in your terminal.
 
 
 ## Drivers
@@ -45,7 +45,7 @@ The `SiteContext` context provides step definitions for activating/deactivating 
 
 ### TinyMCE
 
-The `EditPost` context provides step definitions to manage editing and creating content within wp-admin.
+The `EditPost` context provides step definitions to manage editing and creating content within wp-admin. At time of writing, no support is yet provided for Gutenberg.
 
 ### Toolbar
 

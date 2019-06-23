@@ -10,7 +10,7 @@ Otherwise, if you are unsure how to proceed, first check the [FAQ](/recipes/faq.
 
 One of the fun things about using Behat is seeing it control your web browser and navigating your site. Behat relies on a library called [Mink](http://mink.behat.org/en/latest/) to interface with your web browser. Mink has its own driver system, with [each driver supporting a different combination of browser features](http://mink.behat.org/en/latest/guides/drivers.html#driver-feature-support).
 
-Some Mink drivers run headless web browsers (e.g. Goutte), and these tend to be the fastest, though notably, most do not support Javascript. WordHat's sample configuration file is configured to use [Selenium](http://www.seleniumhq.org/), which supports a broad range of browser features for most use cases. Selenium is fiddly to set up, so we recommend using [vvo/selenium-standalone](https://github.com/vvo/selenium-standalone#command-line-interface).
+Some Mink drivers run headless web browsers (e.g. Goutte), and these tend to be the fastest, though notably, most do not support Javascript. WordHat's sample configuration file is configured to use Google Chrome by default, which supports a broad range of browser features for most use cases.
 
 For tests requiring Javascript interactions, mark the scenario or feature with the `@javascript` [tag](http://behat.org/en/latest/user_guide/organizing.html#tags).
 

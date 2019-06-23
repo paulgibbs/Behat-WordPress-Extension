@@ -87,7 +87,6 @@ nav:
       - Errors W800-899: recipes/errors/w800-899.md
   - Open Source:
     - Contributing: contributing/open-source.md
-    - Build Process: contributing/build.md
     - Credits: credits.md
     - License: license.md
   - News: changelog.md
