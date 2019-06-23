@@ -33,6 +33,7 @@ default:
             validate_certificate: false
 
     PaulGibbs\WordpressBehatExtension:
+      default_driver: wpcli
       users:
         -
           roles:

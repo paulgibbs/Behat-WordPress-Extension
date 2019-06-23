@@ -23,7 +23,6 @@ cache:
   apt: true
   directories:
     - $HOME/.composer/cache/files
-    - $HOME/.npm
 
 git:
   depth: 3
@@ -39,8 +38,8 @@ env:
     - WP_VERSION="~5.1"
     - WP_WEBROOT="tests/app/www/"
   matrix:
-    - LABEL="wpcli" BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\",\"path\":\"$WP_WEBROOT\"}}}"
-    - LABEL="wpphp" BEHAT_PARAMS="{\"extensions\":{\"Behat\\\\MinkExtension\":{\"base_url\":\"http://localhost:8000\"},\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpphp\",\"path\":\"$WP_WEBROOT\"}}}"
+    - LABEL="wpcli" BEHAT_PARAMS="{\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\"}}"
+    - LABEL="wpphp" BEHAT_PARAMS="{\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpphp\"}}"
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -50,18 +49,15 @@ install:
   - travis_retry composer global require $DEFAULT_COMPOSER_FLAGS hirak/prestissimo
   - travis_retry composer install $DEFAULT_COMPOSER_FLAGS
   - travis_retry composer require roots/wordpress $WP_VERSION
-  - npm install selenium-standalone@latest -g
-  - selenium-standalone install
 
   # Start webserver.
   - php -S localhost:8000 -t $WP_WEBROOT 2>/dev/null &
-  - sleep 10
+  - sleep 5
   - scripts/install.sh
 
-before_script:
-  # Start Selenium.
-  - xvfb-run --server-args="-screen 0 1920x1080x24" selenium-standalone start 2>&1 1>/dev/null &
-  - sleep 20
+  # Start Chrome.
+  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 &
+  - sleep 5
 
 script:
   - curl -I http://localhost:8000
