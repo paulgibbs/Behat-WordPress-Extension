@@ -38,8 +38,8 @@ env:
     - WP_VERSION="~5.1"
     - WP_WEBROOT="tests/app/www/"
   matrix:
-    - LABEL="wpcli" BEHAT_PARAMS="{\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\"}}"
-    - LABEL="wpphp" BEHAT_PARAMS="{\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpphp\"}}"
+    - LABEL="wpcli" BEHAT_PARAMS="{\"extensions\":{\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpcli\"}}}"
+    - LABEL="wpphp" BEHAT_PARAMS="{\"extensions\":{\"PaulGibbs\\\\WordpressBehatExtension\":{\"default_driver\":\"wpphp\"}}}"
 
 before_install:
   - phpenv config-rm xdebug.ini

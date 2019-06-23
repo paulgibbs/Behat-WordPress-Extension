@@ -15,6 +15,8 @@ default:
         - FailAid\Context\FailureContext
 
   extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
     Behat\MinkExtension:
       base_url: http://localhost:8000
       browser_name: chrome
