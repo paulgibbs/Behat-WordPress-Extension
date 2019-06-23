@@ -41,12 +41,12 @@ default:
           roles:
             - administrator
           username: admin
-          password: admin
+          password: password
       database:
         restore_after_test: true
       wpcli:
         binary: vendor/bin/wp
 
     FailAid\Extension:
-      screenshotDirectory: '%paths.base%/tests/artifacts'
+      screenshotDirectory: '%paths.base%/..//artifacts'
       screenshotMode: default
