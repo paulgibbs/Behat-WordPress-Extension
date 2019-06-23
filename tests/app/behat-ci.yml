@@ -48,5 +48,5 @@ default:
         binary: vendor/bin/wp
 
     FailAid\Extension:
-      screenshotDirectory: '%paths.base%/..//artifacts'
+      screenshotDirectory: '%paths.base%/../artifacts'
       screenshotMode: default
