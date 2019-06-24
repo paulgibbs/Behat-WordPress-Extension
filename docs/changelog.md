@@ -3,6 +3,20 @@ description: WordHat project news and changelog
 
 WordHat does not yet support WordPress' new content editor (Gutenberg). The step definitions for creating content assume, and only work with, the classic WordPress editor.
 
+## [3.3.0] - 2019-06-24
+### Added
+- Suport for translations.
+
+### Changed
+- WordHat now requires PHP 7.2+. There are no code changes at this point, so WordHat is still technically compatible with PHP 7.1.
+- `ChromeDriver` is now the default suggested option, instead of a browser via Selenium.
+- CI: use `ChromeDriver` instead of a browser via Selenium.
+- Docs: general updates/corrections.
+
+### Fixed
+- Drivers, WP-PHP: fix PHP notice when creating a user.
+- Contexts, Content: fix inserting text into visual editor iframe for non-Selenium webdrivers.
+
 ## [3.2.0] - 2019-06-05
 ### Added
 - CI: Run build checks on Travis-CI.
@@ -230,6 +244,7 @@ WordHat does not yet support WordPress' new content editor (Gutenberg). The step
 ### Added
 - First working version of basic architecture.
 
+[3.3.0]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.1.2...v3.2.0
 [3.1.2]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.1.1...v3.1.2
 [3.1.1]: https://github.com/paulgibbs/behat-wordpress-extension/compare/v3.1.0...v3.1.1
