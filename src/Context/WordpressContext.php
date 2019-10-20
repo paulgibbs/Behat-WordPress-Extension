@@ -56,6 +56,7 @@ class WordpressContext extends RawWordpressContext
         // If the path specified is not a file, use it as the preferred folder to store a new backup.
         if (! $file || ! is_file($file) || ! is_readable($file)) {
             $file = $this->exportDatabase(['path' => $file]);
+            $this->getWordpress()->setSetting('built_database_backup', true);
         }
 
         // Note: $file may be either an absolute OR relative file path.
@@ -127,23 +128,27 @@ class WordpressContext extends RawWordpressContext
     }
 
     /**
-     * If database.restore_after_test is set, and scenario is tagged "db", restore the database from a backup.
+     * If a database dump exists, delete it after the test suite has completed.
      *
-     * The database will be restored from a backup made via maybeBackupDatabase().
-     *
-     * @AfterScenario @db
+     * @AfterSuite @db
      *
      * @param Event\SuiteEvent $scope
      */
     public function maybeRemoveDatabaseDump(Event\SuiteEvent $event)
     {
+        $delete_backup = $this->getWordpress()->getSetting('built_database_backup');
+        if ($delete_backup === null) {
+            return;
+        }
+
         $file = $this->getWordpress()->getSetting('database_backup_file');
         if (! $file) {
             return;
         }
 
+        $this->getWordpress()->setSetting('database_backup_file', false);
+
         // TODO: how to delete $file? Could be remote.
         //$this->importDatabase(['path' => $file]);
     }
-}
 }
