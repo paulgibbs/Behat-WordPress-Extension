@@ -4,6 +4,7 @@ parameters:
   wordpress.element.wpcli.comment.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\CommentElement
   wordpress.element.wpcli.content.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\ContentElement
   wordpress.element.wpcli.database.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\DatabaseElement
+  wordpress.element.wpcli.filesystem.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\FilesystemElement
   wordpress.element.wpcli.plugin.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\PluginElement
   wordpress.element.wpcli.term.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\TermElement
   wordpress.element.wpcli.theme.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpcli\ThemeElement
@@ -48,6 +49,13 @@ services:
       - "@wordpress.wordpress"
     tags:
       - { name: wordpress.element, alias: database, driver: wpcli }
+
+  wordpress.element.wpcli.filesystem:
+    class: "%wordpress.element.wpcli.filesystem.class%"
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: filesystem, driver: wpcli }
 
   wordpress.element.wpcli.plugin:
     class: "%wordpress.element.wpcli.plugin.class%"

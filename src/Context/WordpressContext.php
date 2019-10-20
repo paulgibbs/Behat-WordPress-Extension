@@ -8,6 +8,7 @@ use Behat\Behat\Event;
 use Behat\Mink\Driver\Selenium2Driver;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\CacheAwareContextTrait;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\DatabaseAwareContextTrait;
+use PaulGibbs\WordpressBehatExtension\Context\Traits\FilesystemAwareContextTrait;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\PageObjectAwareContextTrait;
 
 /**
@@ -15,7 +16,7 @@ use PaulGibbs\WordpressBehatExtension\Context\Traits\PageObjectAwareContextTrait
  */
 class WordpressContext extends RawWordpressContext
 {
-    use PageObjectAwareContextTrait, CacheAwareContextTrait, DatabaseAwareContextTrait;
+    use PageObjectAwareContextTrait, CacheAwareContextTrait, DatabaseAwareContextTrait, FilesystemAwareContextTrait;
 
     /**
      * Constructor.
@@ -46,7 +47,7 @@ class WordpressContext extends RawWordpressContext
          * Otherwise, we would use the (static) BeforeSuiteScope hook.
          */
         $backup_file = $this->getWordpress()->getSetting('database_backup_file');
-        if ($backup_file) {
+        if (! empty($backup_file)) {
             return;
         }
 
@@ -120,7 +121,7 @@ class WordpressContext extends RawWordpressContext
         }
 
         $file = $this->getWordpress()->getSetting('database_backup_file');
-        if (! $file) {
+        if (empty($file)) {
             return;
         }
 
@@ -128,7 +129,7 @@ class WordpressContext extends RawWordpressContext
     }
 
     /**
-     * If a database dump exists, delete it after the test suite has completed.
+     * If WordHat created its own database dump, delete it after the test suite has completed.
      *
      * @AfterSuite @db
      *
@@ -142,13 +143,13 @@ class WordpressContext extends RawWordpressContext
         }
 
         $file = $this->getWordpress()->getSetting('database_backup_file');
-        if (! $file) {
+        if (empty($file)) {
             return;
         }
 
-        $this->getWordpress()->setSetting('database_backup_file', false);
+        $this->getWordpress()->setSetting('database_backup_file', null);
+        $this->getWordpress()->setSetting('built_database_backup', null);
 
-        // TODO: how to delete $file? Could be remote.
-        //$this->importDatabase(['path' => $file]);
+        $this->deleteFile($file);
     }
 }
