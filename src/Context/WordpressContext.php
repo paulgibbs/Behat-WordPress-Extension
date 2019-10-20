@@ -4,9 +4,11 @@ namespace PaulGibbs\WordpressBehatExtension\Context;
 
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Behat\Event;
 use Behat\Mink\Driver\Selenium2Driver;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\CacheAwareContextTrait;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\DatabaseAwareContextTrait;
+use PaulGibbs\WordpressBehatExtension\Context\Traits\FilesystemAwareContextTrait;
 use PaulGibbs\WordpressBehatExtension\Context\Traits\PageObjectAwareContextTrait;
 
 /**
@@ -14,7 +16,7 @@ use PaulGibbs\WordpressBehatExtension\Context\Traits\PageObjectAwareContextTrait
  */
 class WordpressContext extends RawWordpressContext
 {
-    use PageObjectAwareContextTrait, CacheAwareContextTrait, DatabaseAwareContextTrait;
+    use PageObjectAwareContextTrait, CacheAwareContextTrait, DatabaseAwareContextTrait, FilesystemAwareContextTrait;
 
     /**
      * Constructor.
@@ -45,7 +47,7 @@ class WordpressContext extends RawWordpressContext
          * Otherwise, we would use the (static) BeforeSuiteScope hook.
          */
         $backup_file = $this->getWordpress()->getSetting('database_backup_file');
-        if ($backup_file) {
+        if (! empty($backup_file)) {
             return;
         }
 
@@ -55,6 +57,7 @@ class WordpressContext extends RawWordpressContext
         // If the path specified is not a file, use it as the preferred folder to store a new backup.
         if (! $file || ! is_file($file) || ! is_readable($file)) {
             $file = $this->exportDatabase(['path' => $file]);
+            $this->getWordpress()->setSetting('built_database_backup', true);
         }
 
         // Note: $file may be either an absolute OR relative file path.
@@ -118,10 +121,35 @@ class WordpressContext extends RawWordpressContext
         }
 
         $file = $this->getWordpress()->getSetting('database_backup_file');
-        if (! $file) {
+        if (empty($file)) {
             return;
         }
 
         $this->importDatabase(['path' => $file]);
+    }
+
+    /**
+     * If WordHat created its own database dump, delete it after the test suite has completed.
+     *
+     * @AfterSuite @db
+     *
+     * @param Event\SuiteEvent $scope
+     */
+    public function maybeRemoveDatabaseDump(Event\SuiteEvent $event)
+    {
+        $delete_backup = $this->getWordpress()->getSetting('built_database_backup');
+        if ($delete_backup === null) {
+            return;
+        }
+
+        $file = $this->getWordpress()->getSetting('database_backup_file');
+        if (empty($file)) {
+            return;
+        }
+
+        $this->getWordpress()->setSetting('database_backup_file', null);
+        $this->getWordpress()->setSetting('built_database_backup', null);
+
+        $this->deleteFile($file);
     }
 }

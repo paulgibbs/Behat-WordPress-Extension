@@ -4,6 +4,7 @@ parameters:
   wordpress.element.wpphp.comment.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\CommentElement
   wordpress.element.wpphp.content.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\ContentElement
   wordpress.element.wpphp.database.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\DatabaseElement
+  wordpress.element.wpphp.filesystem.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\FilesystemElement
   wordpress.element.wpphp.plugin.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\PluginElement
   wordpress.element.wpphp.term.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\TermElement
   wordpress.element.wpphp.theme.class: PaulGibbs\WordpressBehatExtension\Driver\Element\Wpphp\ThemeElement
@@ -45,6 +46,13 @@ services:
       - "@wordpress.wordpress"
     tags:
       - { name: wordpress.element, alias: database, driver: wpphp }
+
+  wordpress.element.wpphp.filesystem:
+    class: "%wordpress.element.wpphp.filesystem.class%"
+    arguments:
+      - "@wordpress.wordpress"
+    tags:
+      - { name: wordpress.element, alias: filesystem, driver: wpphp }
 
   wordpress.element.wpphp.plugin:
     class: "%wordpress.element.wpphp.plugin.class%"
